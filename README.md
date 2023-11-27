@@ -10,7 +10,7 @@ CINF-405 Team Project
 ## Need to be done:
 - [ ] player can "talk" to building, and shows a dialog window
 - [ ] make graphs showing the price trend for stock, crypto, and real estate trading
-- [ ] player can sell and buy stocks, crypto, houses when interacting with corresponding building
+- [ ] player can buy/sell stocks, crypto or houses when interacting with coresponding building
 - [ ] functions for casino, lottery, bank
 
 ## Done: 
