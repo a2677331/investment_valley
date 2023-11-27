@@ -1,5 +1,9 @@
 import pygame
 
+'''
+To provide a genearal sprite layout for the game, 
+used in level.py to load and display background image
+'''
 
 class Generic(pygame.sprite.Sprite):
     def __init__(self, pos, surf, groups):

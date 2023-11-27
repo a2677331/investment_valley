@@ -1,6 +1,5 @@
 from pygame.math import Vector2
 
-# screen
+# The screen width and height
 SCREEN_WIDTH = 1280
-SCREEN_HEIGHT = 720
-TILE_SIZE = 64
+SCREEN_HEIGHT = 770

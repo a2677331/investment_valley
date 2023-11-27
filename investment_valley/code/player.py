@@ -2,8 +2,9 @@ import pygame
 from support import *
 
 '''
-This file is to setup the player (character)
+This file is to setup all related functions the player (character)
 ''' 
+
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos, group, buidling_rects):
         super().__init__(group)
@@ -24,7 +25,8 @@ class Player(pygame.sprite.Sprite):
         self.speed = 200
 
     def import_assets(self):
-        self.animations = {'up': [], 'up_idle': [], 'down':[], 'down_idle': [], 'left':[], 'left_idle':[], 'right':[], 'right_idle':[]}
+        self.animations = {'up': [], 'up_idle': [], 'down':[], 'down_idle': [], 'left':[], 'left_idle':[], 'right':[], 'right_idle':[],
+                           'up_axe': []}
 
         # load animations images
         for animation in self.animations.keys():
@@ -39,7 +41,7 @@ class Player(pygame.sprite.Sprite):
     def input(self):
         keys = pygame.key.get_pressed()
         
-        # Directions
+        # Directions control using arrow keys
         if keys[pygame.K_UP]:
             self.direction.y = -1
             self.status = 'up'
@@ -57,8 +59,12 @@ class Player(pygame.sprite.Sprite):
             self.status = 'right'
         else:
             self.direction.x = 0
-            
         
+    def get_status(self):
+        # set statusfor idle animation
+        if self.direction.magnitude() == 0:
+            self.status = self.status.split('_')[0] + '_idle'
+    
     def move(self, dt):
         # make diagonal movement same speed as straight directions
         if self.direction.magnitude() > 0:
@@ -75,11 +81,6 @@ class Player(pygame.sprite.Sprite):
         self.hitbox.centery = round(self.pos.y)
         self.rect.centery = self.hitbox.centery
         self.collision('vertical')
-    
-    def get_status(self):
-        # set statusfor idle animation
-        if self.direction.magnitude() == 0:
-            self.status = self.status.split('_')[0] + '_idle'
         
     def collision(self, direction):
         # Collision detected, stop the player movement
@@ -107,5 +108,4 @@ class Player(pygame.sprite.Sprite):
         self.get_status()
         self.move(dt)
         self.animate(dt)
-
         

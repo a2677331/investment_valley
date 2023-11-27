@@ -1,10 +1,13 @@
 import pygame, sys 
 from level import Level
 from settings import *
+from support import *
 
 '''
-This file is for running the game
+This file is about initial setup, 
+to start the game or display intro screen depending on whether the game is active or not
 '''
+
 class Game:
     def __init__(self):
         pygame.init()
@@ -12,6 +15,9 @@ class Game:
         self.clock = pygame.time.Clock()
         pygame.display.set_caption("Investment Valley") # set show game title
         self.level = Level()
+        self.game_active = False
+        self.score = 0      # money score
+        self.start_time = 0 # set game start time
 
     def run(self):
         while True:
@@ -19,12 +25,23 @@ class Game:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+                                
+            if self.game_active:
+                # run the game
+                dt = self.clock.tick() / 1000
+                if self.level.run(dt, self.start_time) <= 0: # if time is up, end the game
+                    self.game_active = False
+                    self.start_time = int(pygame.time.get_ticks() / 1000) # reset start time
+            else:
+                # show intro screen
+                show_intro_screen(self.screen, self.score)
+                keys = pygame.key.get_pressed()
+                if keys[pygame.K_SPACE]:
+                    self.game_active = True
             
-            dt = self.clock.tick() / 1000
-            self.level.run(dt)
-            pygame.display.update()
-        
-        
+            pygame.display.update() # update everything
+
+
 if __name__ == '__main__':
     game = Game()
-    game.run() # run the game
+    game.run()  # initialize the game
