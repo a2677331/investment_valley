@@ -12,9 +12,9 @@ CINF-405 Team Project
 - [ ] make graphs showing the price trend for stock, crypto, and real estate trading
 - [ ] player can sell and buy stocks, crypto, houses when interacting with corresponding building
 - [ ] functions for casino, lottery, bank
-- [ ] set a timer for 5 min
 
 ## Done: 
+- [x] set a timer for 5 min
 - [x] label each building with names "stock exchange", "casino"...
 - [x] player can move using arrow keys
 - [x] 5 buildings with collision detection, so player cannot move across each building
