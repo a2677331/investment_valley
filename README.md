@@ -14,6 +14,7 @@ CINF-405 Team Project
 - [ ] functions for casino, lottery, bank (Aidan)
 
 ## Done: 
+- [x] added a money score in the top bar
 - [x] set a timer for 5 min
 - [x] label each building with names "stock exchange", "casino"...
 - [x] player can move using arrow keys
