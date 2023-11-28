@@ -18,6 +18,7 @@ class Game:
         self.game_active = False
         self.score = 0      # money score
         self.start_time = 0 # set game start time
+        self.money = None   # player's moeny score
 
     def run(self):
         while True:
@@ -29,7 +30,7 @@ class Game:
             if self.game_active:
                 # run the game
                 dt = self.clock.tick() / 1000
-                if self.level.run(dt, self.start_time) <= 0: # if time is up, end the game
+                if self.level.run(dt, self.start_time)[0] <= 0: # if time is up, end the game
                     self.game_active = False
                     self.start_time = int(pygame.time.get_ticks() / 1000) # reset start time
             else:

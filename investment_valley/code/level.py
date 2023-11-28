@@ -21,6 +21,9 @@ class Level:
         
         # setup background image, player and buidlings surfaces
         self.setup()
+        
+        # money earned by user
+        self.money = 0
 
     def setup(self):
         # background image
@@ -41,5 +44,5 @@ class Level:
         self.display_surface.fill("black")
         self.all_sprites.draw(self.display_surface)
         self.all_sprites.update(dt) # update every sprite in setup()
-        return display_time_left(self.display_surface, start_time)
+        return display_status_bar(self.display_surface, start_time, self.money)
 
