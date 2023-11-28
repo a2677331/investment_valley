@@ -27,11 +27,11 @@ class Level:
         Generic((0,50), pygame.image.load("graphics/world/ground.png").convert_alpha(), self.all_sprites)
 
         # buildings' position and size for collision detection
-        building1_rect = pygame.Rect(130, 101, 179, 100)
-        building2_rect = pygame.Rect(553, 117, 197, 105)
-        building3_rect = pygame.Rect(987, 145, 206, 85)
-        building4_rect = pygame.Rect(261, 550, 117, 92)
-        building5_rect = pygame.Rect(1007, 570, 165, 90)
+        building1_rect = pygame.Rect(130, 101, 179, 90)
+        building2_rect = pygame.Rect(553, 117, 197, 85)
+        building3_rect = pygame.Rect(987, 145, 206, 65)
+        building4_rect = pygame.Rect(261, 550, 117, 82)
+        building5_rect = pygame.Rect(1007, 570, 165, 75)
         buidling_rects = [building1_rect, building2_rect, building3_rect, building4_rect, building5_rect]
         
         # player
