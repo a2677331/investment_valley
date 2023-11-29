@@ -25,8 +25,7 @@ class Player(pygame.sprite.Sprite):
         self.speed = 200
 
     def import_assets(self):
-        self.animations = {'up': [], 'up_idle': [], 'down':[], 'down_idle': [], 'left':[], 'left_idle':[], 'right':[], 'right_idle':[],
-                           'up_axe': []}
+        self.animations = {'up': [], 'up_idle': [], 'down':[], 'down_idle': [], 'left':[], 'left_idle':[], 'right':[], 'right_idle':[]}
 
         # load animations images
         for animation in self.animations.keys():
