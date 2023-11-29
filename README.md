@@ -8,12 +8,13 @@ CINF-405 Team Project
 - type  `python3 code/game.py`  to run the game
 
 ## Need to be done:
-- [ ] player can "talk" to building, and shows a dialog window (Dylan)
+- [ ] shows a dialog window when player "talks" to a building (Dylan)
 - [ ] make graphs showing the price trend for stock, crypto, and real estate trading (Dominick)
 - [ ] player can buy/sell stocks, crypto or houses (Nick)
 - [ ] functions for casino, lottery, bank (Aidan)
 
 ## Done: 
+- [x] player can "talk" to building (Dylan)
 - [x] added a money score in the top bar
 - [x] set a timer for 5 min
 - [x] label each building with names "stock exchange", "casino"...
