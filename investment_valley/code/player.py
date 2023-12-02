@@ -109,6 +109,8 @@ class Player(pygame.sprite.Sprite):
             posX, posY = int(posX), int(posY)  # Typecasts the floats to ints so they can be compared
             if 325 >= posX >= 115 and 250 >= posY >= 200:  # Check if the player is near Stock building
                 self.in_stock_building = True
+                if keys[pygame.K_RETURN]:  # Check if the Enter key is pressed
+                    self.show_stock_menu = True
             elif 780 >= posX >= 530 and 250 >= posY >= 200:  # Check if the player is near Real Estate building
                 print("Real Estate Area")
             elif 1220 >= posX >= 960 and 250 >= posY >= 200:  ##Check if the player is near Casino building
