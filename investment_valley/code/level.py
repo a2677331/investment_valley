@@ -31,7 +31,7 @@ class Level:
         # background image
         # THIS IS TEMPORARY CODE
         # Get the absolute path to the 'ground.png' file
-        file_path = os.path.abspath("../graphics/world/ground.png")
+        file_path = os.path.abspath("../../investment_valley/graphics/world/ground.png")
 
         if not os.path.exists(file_path):
 
