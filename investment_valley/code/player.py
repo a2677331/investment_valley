@@ -6,7 +6,7 @@ This file is to setup all related functions the player (character)
 ''' 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos, group, buidling_rects):
+    def __init__(self, pos, group, buidling_rects, display_surface, starting_balance=1500):
         super().__init__(group)
         
         self.import_assets() # for self.animations in the following lines
