@@ -30,14 +30,14 @@ class Level:
     def setup(self):
         # background image
         # THIS IS TEMPORARY CODE
-        # Get the absolute path to the 'ground.png' file
-        file_path = os.path.abspath("../../../graphics/world/ground.png")
-
-        if not os.path.exists(file_path):
-
-            raise FileNotFoundError(f"Error: File not found - {file_path}")
+       # Get the absolute path to the 'ground.png' file
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        file_path = os.path.join(base_dir, "../../investment_valley/graphics/world/ground.png")
         
-        Generic((0,50), pygame.image.load(file_path).convert_alpha(), self.all_sprites)
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"Error: File not found - {file_path}")
+
+        Generic((0, 50), pygame.image.load(file_path).convert_alpha(), self.all_sprites)
 
         # buildings' position and size for collision detection
         building1_rect = pygame.Rect(130, 101, 179, 90)
