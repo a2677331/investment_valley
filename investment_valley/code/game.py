@@ -34,9 +34,9 @@ class Game:
                     self.game_active = False
                     self.start_time = int(pygame.time.get_ticks() / 1000) # reset start time
 
-                    if self.level.player.in_stock_building:
-                        self.level.player.stock_menu()
-                        self.level.player.handle_stock_menu_input()
+                if self.level.player.in_stock_building:
+                    self.level.player.stock_menu()
+                    self.level.player.handle_stock_menu_input()
             else:
                 # show intro screen
                 show_intro_screen(self.screen, self.score)
