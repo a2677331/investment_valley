@@ -38,7 +38,7 @@ class Level:
         buidling_rects = [building1_rect, building2_rect, building3_rect, building4_rect, building5_rect]
         
         # player
-        self.player = Player((640,360), self.all_sprites, buidling_rects)
+        self.player = Player((640,360), self.all_sprites, buidling_rects, display_surface)
                              
     def run(self, dt, start_time):
         self.display_surface.fill("black")
