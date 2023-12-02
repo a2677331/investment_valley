@@ -2,6 +2,7 @@ import pygame, sys
 from level import Level
 from settings import *
 from support import *
+from pygame.locals import *
 
 '''
 This file is about initial setup, 
