@@ -25,7 +25,7 @@ class Player(pygame.sprite.Sprite):
         self.speed = 200
 
         # financial attributes
-        self.in_building = False
+        self.in_stock_building = False
         self.money = starting_balance
         self.stocks_owned = {
             'CocaCola (KO)': 0,
