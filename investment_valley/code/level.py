@@ -44,5 +44,14 @@ class Level:
         self.display_surface.fill("black")
         self.all_sprites.draw(self.display_surface)
         self.all_sprites.update(dt) # update every sprite in setup()
+
+        # Check if the player is in the stock building
+        if self.player.in_stock_building:
+            self.player.stock_menu()
+            self.player.handle_stock_menu_input()
+
+            # Display stock prices on the screen
+            self.player.display_stock_prices()
+            
         return display_status_bar(self.display_surface, start_time, self.money)
 
