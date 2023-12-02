@@ -27,7 +27,7 @@ class Level:
 
     def setup(self):
         # background image
-        Generic((0,50), pygame.image.load("graphics/world/ground.png").convert_alpha(), self.all_sprites)
+        Generic((0,50), pygame.image.load("../graphics/world/ground.png").convert_alpha(), self.all_sprites)
 
         # buildings' position and size for collision detection
         building1_rect = pygame.Rect(130, 101, 179, 90)
