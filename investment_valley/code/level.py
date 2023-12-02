@@ -2,6 +2,8 @@ import pygame
 from player import Player
 from support import *
 from sprites import * 
+#IMPORT TEMPORARY
+import os
 
 '''
 This file is to draw the game layout
@@ -27,7 +29,15 @@ class Level:
 
     def setup(self):
         # background image
-        Generic((0,50), pygame.image.load("../graphics/world/ground.png").convert_alpha(), self.all_sprites)
+        # THIS IS TEMPORARY CODE
+        # Get the absolute path to the 'ground.png' file
+        file_path = os.path.abspath("../graphics/world/ground.png")
+
+        if not os.path.exists(file_path):
+
+            raise FileNotFoundError(f"Error: File not found - {file_path}")
+        
+        Generic((0,50), pygame.image.load(file_path).convert_alpha(), self.all_sprites)
 
         # buildings' position and size for collision detection
         building1_rect = pygame.Rect(130, 101, 179, 90)
