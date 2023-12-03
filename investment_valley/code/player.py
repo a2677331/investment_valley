@@ -65,6 +65,7 @@ class Player(pygame.sprite.Sprite):
         self.display_surface = display_surface
         self.show_stock_menu = False
         self.font = pygame.font.Font(None, 36)
+        self.quantity_input = ""  # Add this line to initialize quantity_input
 
     def import_assets(self):
         self.animations = {'up': [], 'up_idle': [], 'down': [], 'down_idle': [], 'left': [], 'left_idle': [],
