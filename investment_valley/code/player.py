@@ -205,7 +205,14 @@ class Player(pygame.sprite.Sprite):
                 elif event.key == K_0:
                     self.show_stock_menu = False
 
-        # Get the quantity of stocks to purchase using Pygame's event handling
+        # Check if self.quantity_input is not empty before trying to convert to an integer
+        if self.quantity_input:
+            # Get the quantity of stocks to purchase using Pygame's event handling
+            quantity = int(self.quantity_input)
+            self.buy_stock(self.selected_stock, quantity)
+            self.quantity_input = ""  # Reset the quantity input
+
+            # Get the quantity of stocks to purchase using Pygame's event handling
         key_to_digit = {
             K_1: 1,
             K_2: 2,
