@@ -208,13 +208,18 @@ class Player(pygame.sprite.Sprite):
         # Get the quantity of stocks to purchase using Pygame's event handling
         for key in (K_1, K_2, K_3, K_4, K_5):
             if keys[key]:
-                self.quantity_input += str(key - K_0)
+                digit = key - K_0
+                self.quantity_input += str(digit)
 
         # If Enter key is pressed, convert the quantity input to an integer
-        if keys[K_RETURN] and self.quantity_input:
-            quantity = int(self.quantity_input)
-            self.buy_stock(self.selected_stock, quantity)
-            self.quantity_input = ""  # Reset the quantity input
+        if keys[K_RETURN]:
+            if self.quantity_input:
+                try:
+                    quantity = int(self.quantity_input)
+                    self.buy_stock(self.selected_stock, quantity)
+                    self.quantity_input = ""  # Reset the quantity input
+                except ValueError:
+                    print("Invalid quantity input. Please enter a valid number.")
 
             # Get the quantity of stocks to purchase using Pygame's event handling
         key_to_digit = {
