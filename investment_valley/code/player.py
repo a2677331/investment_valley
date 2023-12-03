@@ -108,10 +108,10 @@ class Player(pygame.sprite.Sprite):
         NOTE: the print statements are place holders for when we decide what to 
         do when the player interacts with a bulding
         '''
-        if keys[pygame.K_RETURN]:
-            posX, posY = self.pos  # Assigns the x and y of the players position to a variable
-            posX, posY = int(posX), int(posY)  # Typecasts the floats to ints so they can be compared
-            if 325 >= posX >= 115 and 250 >= posY >= 200:  # Check if the player is near Stock building
+            if keys[pygame.K_s]:
+                posX, posY = self.pos
+                posX, posY = int(posX), int(posY)
+            if 325 >= posX >= 115 and 250 >= posY >= 200:
                 self.in_stock_building = True
                 self.show_stock_menu = True
             elif 780 >= posX >= 530 and 250 >= posY >= 200:  # Check if the player is near Real Estate building
