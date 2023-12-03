@@ -108,20 +108,20 @@ class Player(pygame.sprite.Sprite):
         NOTE: the print statements are place holders for when we decide what to 
         do when the player interacts with a bulding
         '''
-            if keys[pygame.K_s]:
-                posX, posY = self.pos
-                posX, posY = int(posX), int(posY)
-            if 325 >= posX >= 115 and 250 >= posY >= 200:
-                self.in_stock_building = True
-                self.show_stock_menu = True
-            elif 780 >= posX >= 530 and 250 >= posY >= 200:  # Check if the player is near Real Estate building
-                print("Real Estate Area")
-            elif 1220 >= posX >= 960 and 250 >= posY >= 200:  ##Check if the player is near Casino building
-                print("Casino Area")
-            elif 400 >= posX >= 250 and 680 >= posY >= 630:  # Check if the player is near Bank building
-                print("Bank Area")
-            elif 1200 >= posX >= 980 and 700 >= posY >= 630:  # Check if the player is near Lottery building
-                print("Lottery Area")
+        if keys[pygame.K_s]:
+            posX, posY = self.pos
+            posX, posY = int(posX), int(posY)
+        if 325 >= posX >= 115 and 250 >= posY >= 200:
+            self.in_stock_building = True
+            self.show_stock_menu = True
+        elif 780 >= posX >= 530 and 250 >= posY >= 200:  # Check if the player is near Real Estate building
+            print("Real Estate Area")
+        elif 1220 >= posX >= 960 and 250 >= posY >= 200:  ##Check if the player is near Casino building
+            print("Casino Area")
+        elif 400 >= posX >= 250 and 680 >= posY >= 630:  # Check if the player is near Bank building
+            print("Bank Area")
+        elif 1200 >= posX >= 980 and 700 >= posY >= 630:  # Check if the player is near Lottery building
+            print("Lottery Area")
 
     def get_status(self):
         # set status for idle animation
