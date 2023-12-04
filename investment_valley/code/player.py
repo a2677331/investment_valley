@@ -304,11 +304,6 @@ class Player(pygame.sprite.Sprite):
                     # Display purchase prompt
                     self.show_purchase_prompt = True
 
-        # Handle close button click
-        mouse_pos = pygame.mouse.get_pos()
-        if close_button_rect.collidepoint(mouse_pos):
-            self.close_stock_menu()
-
         # Handle quantity input
         if self.input_active and self.show_purchase_prompt:
             self.get_numeric_input()
