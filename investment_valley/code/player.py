@@ -17,6 +17,10 @@ class Player(pygame.sprite.Sprite):
         self.frame_index = 0
         self.buidling_rects = buidling_rects
 
+        # New attributes for purchase flow
+        self.show_purchase_prompt = False
+        self.selected_stock = None
+
         # general setup
         self.image = self.animations[self.status][self.frame_index]
         self.rect = self.image.get_rect(center = pos)
