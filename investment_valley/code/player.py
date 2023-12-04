@@ -443,6 +443,9 @@ class Player(pygame.sprite.Sprite):
         self.selected_stock = None
 
     def display_stock_performance(self, stock_name):
+        # Clear the menu
+        self.clear_menu()
+
         if stock_name == 'CocaCola (KO)':
             message = "Congratulations! Coca Cola has netted you 7% returns over the last 5 years. Your investment is now worth $81.35."
         elif stock_name == 'Apple (AAPL)':
@@ -456,8 +459,16 @@ class Player(pygame.sprite.Sprite):
         else:
             message = "Unknown stock selected."
 
-        # Display the message
-        print(message)
+        # Display the message on the game surface
+        text_position = (400, 250)  # Adjust the position as needed
+        self.draw_text(message, text_position)
+
+        # Update the game display
+        pygame.display.flip()
+        pygame.time.wait(5000)  # Wait for 5000 milliseconds (5 seconds)
+
+        # Clear the menu again if needed
+        self.clear_menu()
 
     def update_stock_prices(self):
         for stock_name, characteristics in self.stock_prices.items():
