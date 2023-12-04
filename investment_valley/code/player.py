@@ -204,6 +204,14 @@ class Player(pygame.sprite.Sprite):
                     self.buy_stock('UnitedHealth Group Inc (UNH)')
                 elif event.key == K_0:
                     self.show_stock_menu = False
+                elif event.key == K_RETURN:
+                    if self.quantity_input:
+                        try:
+                            quantity = int(self.quantity_input)
+                            self.buy_stock(self.selected_stock, quantity)
+                            self.quantity_input = ""  # Reset the quantity input
+                        except ValueError:
+                            print("Invalid quantity input. Please enter a valid number.")
 
         # Get the quantity of stocks to purchase using Pygame's event handling
         key_to_digit = {
@@ -220,13 +228,9 @@ class Player(pygame.sprite.Sprite):
 
         # If Enter key is pressed, convert the quantity input to an integer
         if keys[K_RETURN]:
-            if self.quantity_input:
-                try:
-                    quantity = int(self.quantity_input)
-                    self.buy_stock(self.selected_stock, quantity)
-                    self.quantity_input = ""  # Reset the quantity input
-                except ValueError:
-                    print("Invalid quantity input. Please enter a valid number.")
+            quantity = int(self.quantity_input)
+            self.buy_stock(self.selected_stock, quantity)
+            self.quantity_input = ""  # Reset the quantity input
 
     def display_stock_prices(self):
         for i, (stock_name, characteristics) in enumerate(self.stock_prices.items()):
