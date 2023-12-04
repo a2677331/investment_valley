@@ -227,6 +227,15 @@ class Player(pygame.sprite.Sprite):
 
         return prices_text
     
+    def display_stock_prices(self):
+        for i, (stock_name, characteristics) in enumerate(self.stock_prices.items()):
+            current_price = characteristics['current_price']
+            text = f"{stock_name}: ${current_price}"
+
+            # Display stock prices on the screen for each stock
+            text_position = (10, 10 + i * 20)
+            self.draw_text(text, text_position)
+    
     def handle_buy_input(self):
         # Handle the logic for buying the selected stock
         quantity = int(input("Enter the quantity of stocks to purchase: "))
