@@ -517,34 +517,14 @@ class Player(pygame.sprite.Sprite):
     #     text_position = (400, 300)
     #     self.draw_text(text, text_position)
 
-    def draw_text(self, text, position, font_size=None, max_width=None):
+    def draw_text(self, text, position, font_size=None):
         if font_size is not None:
             font = pygame.font.Font(None, font_size)
         else:
             font = self.font
-
-        # Split the text into lines based on word wrapping
-        words = text.split(' ')
-        lines = []
-        current_line = ''
-
-        for word in words:
-            test_line = current_line + word + ' '
-            if max_width is not None and font.size(test_line)[0] > max_width:
-                lines.append(current_line)
-                current_line = word + ' '
-            else:
-                current_line = test_line
-
-        lines.append(current_line)
-
-        # Render and display each line separately
-        for i, line in enumerate(lines):
-            text_surface = font.render(line, True, (255, 255, 255))
-            self.display_surface.blit(text_surface, (position[0], position[1] + i * 30))
-
-        # Update the game display
-        pygame.display.flip()
+        
+        text_surface = font.render(text, True, (255, 255, 255))
+        self.display_surface.blit(text_surface, position)
 
 
 
