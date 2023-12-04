@@ -373,15 +373,15 @@ class Player(pygame.sprite.Sprite):
     #     else:
     #         self.quantity_input = numeric_input
 
-    def show_purchase_options(self):
-         # Clear the menu and display purchase options
-         self.clear_menu()
-         text = f"You have selected {self.selected_stock}. How many years would you like to hold it? Enter the number and press Enter."
-         text_position = (400, 250)
-         self.draw_text(text, text_position)
-         # Get the quantity of stocks to purchase using Pygame's event handling
-         if self.input_active:
-             self.get_numeric_input()
+    # def show_purchase_options(self):
+    #      # Clear the menu and display purchase options
+    #      self.clear_menu()
+    #      text = f"You have selected {self.selected_stock}. How many years would you like to hold it? Enter the number and press Enter."
+    #      text_position = (400, 250)
+    #      self.draw_text(text, text_position)
+    #      # Get the quantity of stocks to purchase using Pygame's event handling
+    #      if self.input_active:
+    #          self.get_numeric_input()
 
     def show_stock_details(self, stock_name):
         self.selected_stock = stock_name
