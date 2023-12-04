@@ -176,36 +176,23 @@ class Player(pygame.sprite.Sprite):
         pygame.draw.rect(self.display_surface, (0, 0, 0), menu_rect)
         pygame.draw.rect(self.display_surface, (255, 255, 255), menu_rect, 2)
 
-        # Display stock price and description for the selected stock
-        if self.selected_stock:
-            stock_name = self.selected_stock
-            stock_type = self.stock_types[stock_name]['type']
-            stock_description = self.stock_types[stock_name]['description']
-            price_text = f"Stock Type: {stock_type}\nDescription: {stock_description}"
-            text_position = (menu_rect.left + 20, menu_rect.top + 20)
-            self.draw_text(price_text, text_position)
+        # Display stock information
+        stock_name = self.selected_stock
+        stock_type = self.stock_types[stock_name]['type']
+        stock_description = self.stock_types[stock_name]['description']
+        stock_price = self.stock_prices[stock_name]['current_price']
 
-        # Display stock options (1-5)
+        info_text = f"{stock_name} ({stock_type}): ${stock_price}\n\n{stock_description}"
+        self.draw_text(info_text, (menu_rect.left + 20, menu_rect.top + 20))
+
+        # Display purchase options
         options = [
-            f"1. Buy CocaCola Stock ({self.stock_types['CocaCola (KO)']['type']})",
-            f"2. Buy Apple Stock ({self.stock_types['Apple (AAPL)']['type']})",
-            f"3. Buy SPY Stock ({self.stock_types['SPDR S&P 500 ETF Trust (SPY)']['type']})",
-            f"4. Buy NEWP Stock ({self.stock_types['New Pacific Metals Corp (NEWP)']['type']})",
-            f"5. Buy UNH Stock ({self.stock_types['UnitedHealth Group Inc (UNH)']['type']})"
+            "1. Buy",
+            "0. Exit Stock Menu"
         ]
 
         for i, option in enumerate(options):
-            text_position = (menu_rect.left + 20, menu_rect.top + 100 + i * 40)
-            self.draw_text(option, text_position)
-
-        # Display purchase options
-        purchase_options = [
-            "6. Buy",
-            "7. Exit"
-        ]
-
-        for i, option in enumerate(purchase_options):
-            text_position = (menu_rect.left + 20, menu_rect.top + 300 + i * 40)
+            text_position = (menu_rect.left + 20, menu_rect.top + 200 + i * 40)
             self.draw_text(option, text_position)
 
     #handles the stock menu input
