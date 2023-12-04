@@ -287,18 +287,23 @@ class Player(pygame.sprite.Sprite):
                 if event.key == K_1:
                     self.selected_stock = 'CocaCola (KO)'
                     self.show_purchase_options()
+                    self.prompt_quantity_input()
                 elif event.key == K_2:
                     self.selected_stock = 'Apple (AAPL)'
                     self.show_purchase_options()
+                    self.prompt_quantity_input()
                 elif event.key == K_3:
                     self.selected_stock = 'SPDR S&P 500 ETF Trust (SPY)'
                     self.show_purchase_options()
+                    self.prompt_quantity_input()
                 elif event.key == K_4:
                     self.selected_stock = 'New Pacific Metals Corp (NEWP)'
                     self.show_purchase_options()
+                    self.prompt_quantity_input()
                 elif event.key == K_5:
                     self.selected_stock = 'UnitedHealth Group Inc (UNH)'
                     self.show_purchase_options()
+                    self.prompt_quantity_input()
                 elif event.key == K_0:
                     self.show_stock_menu = False
                     if self.show_purchase_prompt:
@@ -312,6 +317,50 @@ class Player(pygame.sprite.Sprite):
         # Handle years input
         if self.show_purchase_prompt:
             self.get_years_input()
+
+    def prompt_quantity_input(self):
+        # Set a flag to indicate that the program is waiting for quantity input
+        self.input_active = True
+
+        # Display a prompt message on the screen
+        self.show_purchase_prompt = True
+
+    def get_numeric_input(self):
+        keys = pygame.key.get_pressed()
+        numeric_input = ""
+
+        for key in (K_0, K_1, K_2, K_3, K_4, K_5, K_6, K_7, K_8, K_9):
+            if keys[key]:
+                digit = key - K_0
+                numeric_input += str(digit)
+
+        # If Enter key is pressed, convert the numeric input to an integer
+        if keys[K_RETURN]:
+            if numeric_input:
+                try:
+                    # Convert numeric input to an integer and do further processing
+                    quantity = int(numeric_input)
+                    self.handle_quantity_input(quantity)
+                except ValueError:
+                    print("Invalid input. Please enter a valid number.")
+                
+            # Reset the flags after processing the input
+            self.input_active = False
+            self.show_purchase_prompt = False
+
+        # Update the displayed quantity input in the game window
+        else:
+            self.quantity_input = numeric_input
+
+    def handle_quantity_input(self, quantity):
+        # Your logic to handle the entered quantity
+        print(f"Entered quantity: {quantity}")
+
+        # Further processing, for example, displaying future value or updating player's balance
+        future_value = self.calculate_future_value(self.selected_stock, 1, quantity)
+        print(f"Future value: {future_value}")
+        # Reset selected_stock to None
+        self.selected_stock = None
 
     def get_years_input(self):
         keys = pygame.key.get_pressed()
@@ -348,29 +397,6 @@ class Player(pygame.sprite.Sprite):
         if self.input_active:
             self.get_numeric_input()
 
-    def get_numeric_input(self):
-        keys = pygame.key.get_pressed()
-        numeric_input = ""
-
-        for key in (K_0, K_1, K_2, K_3, K_4, K_5, K_6, K_7, K_8, K_9):
-            if keys[key]:
-                digit = key - K_0
-                numeric_input += str(digit)
-
-        # If Enter key is pressed, convert the numeric input to an integer
-        if keys[K_RETURN]:
-            if numeric_input:
-                try:
-                    years_to_hold = int(numeric_input)
-                    future_value = self.calculate_future_value(self.selected_stock, years_to_hold, 1)
-                    self.display_future_value(years_to_hold, future_value)
-                    self.input_active = False  # Stop further input
-
-                    # Now you can use the years_to_hold and quantity in your logic
-                except ValueError:
-                    print("Invalid input. Please enter a valid number.")
-
-
     def show_stock_details(self, stock_name):
         self.selected_stock = stock_name
         stock_type = self.stock_types[stock_name]['type']
@@ -381,31 +407,6 @@ class Player(pygame.sprite.Sprite):
 
         # Add code to clear the menu and display purchase options
         self.show_purchase_options(stock_name)
-
-
-    def get_numeric_input(self):
-        keys = pygame.key.get_pressed()
-        numeric_input = ""
-
-        for key in (K_0, K_1, K_2, K_3, K_4, K_5, K_6, K_7, K_8, K_9):
-            if keys[key]:
-                digit = key - K_0
-                numeric_input += str(digit)
-
-        # If Enter key is pressed, convert the numeric input to an integer
-        if keys[K_RETURN]:
-            if numeric_input:
-                try:
-                    years_to_hold = int(numeric_input)
-                    future_value = self.calculate_future_value(self.selected_stock, years_to_hold, 1)
-                    self.display_future_value(years_to_hold, future_value)
-                    self.input_active = False  # Stop further input
-                except ValueError:
-                    print("Invalid input. Please enter a valid number.")
-        
-        # update the displayed quantity input in the game window
-        else:
-            self.quantity_input = numeric_input
 
 
         def buy_stock(self, stock_name):
