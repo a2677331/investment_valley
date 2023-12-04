@@ -352,16 +352,6 @@ class Player(pygame.sprite.Sprite):
         # Add code to clear the menu and display purchase options
         self.show_purchase_options(stock_name)
 
-    def show_purchase_options(self, stock_name):
-        # Clear the menu and display purchase options
-        self.clear_menu()
-        text = f"You have selected {stock_name}. How many years would you like to hold it? Enter the number and press Enter."
-        text_position = (400, 250)
-        self.draw_text(text, text_position)
-
-        # Get the quantity of stocks to purchase using Pygame's event handling
-        if self.input_active:
-            self.get_numeric_input()
 
     def get_numeric_input(self):
         keys = pygame.key.get_pressed()
