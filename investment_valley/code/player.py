@@ -398,31 +398,31 @@ class Player(pygame.sprite.Sprite):
         self.show_purchase_options(stock_name)
 
 
-        def buy_stock(self, stock_name):
-            stock_type = self.stock_types[stock_name]['type']
-            stock_description = self.stock_types[stock_name]['description']
+    def buy_stock(self, stock_name):
+        stock_type = self.stock_types[stock_name]['type']
+        stock_description = self.stock_types[stock_name]['description']
 
-            print(f"Stock Type: {stock_type}")
-            print(f"Description: {stock_description}")
+        print(f"Stock Type: {stock_type}")
+        print(f"Description: {stock_description}")
 
-            quantity = int(input("Enter the quantity of stocks to purchase: "))
+        quantity = int(input("Enter the quantity of stocks to purchase: "))
 
-            # Use the fluctuation range to determine the number of years to hold
-            fluctuation_range = self.stock_prices[stock_name]['fluctuation_range']
-            years_to_hold = random.uniform(*fluctuation_range)
+        # Use the fluctuation range to determine the number of years to hold
+        fluctuation_range = self.stock_prices[stock_name]['fluctuation_range']
+        years_to_hold = random.uniform(*fluctuation_range)
 
-            # Get the current stock price from the data
-            stock_price = self.stock_prices[stock_name]['current_price']
+        # Get the current stock price from the data
+        stock_price = self.stock_prices[stock_name]['current_price']
 
-            future_value = self.calculate_future_value(stock_type, years_to_hold, quantity)
-            print(f"Future Value after {years_to_hold:.2f} years: ${future_value}")
+        future_value = self.calculate_future_value(stock_type, years_to_hold, quantity)
+        print(f"Future Value after {years_to_hold:.2f} years: ${future_value}")
 
-            total_cost = stock_price * quantity
-            if self.money >= total_cost:
-                self.money -= total_cost
-                self.stocks_owned[stock_name] += quantity
-            else:
-                print("Insufficient funds!")
+        total_cost = stock_price * quantity
+        if self.money >= total_cost:
+            self.money -= total_cost
+            self.stocks_owned[stock_name] += quantity
+        else:
+            print("Insufficient funds!")
 
     def update_stock_prices(self):
         for stock_name, characteristics in self.stock_prices.items():
