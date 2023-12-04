@@ -37,7 +37,6 @@ class Player(pygame.sprite.Sprite):
         self.in_stock_building = False
         self.show_purchase_prompt = False
         self.money = starting_balance
-        self.update_money_display()
 
         self.stocks_owned = {
             'CocaCola (KO)': 0,
