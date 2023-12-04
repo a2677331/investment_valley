@@ -37,10 +37,11 @@ class Game:
                     self.score = self.level.run(dt, self.start_time)[1]   # get money score from the game previusly played
 
                 if self.level.player.in_stock_building:
-                    self.level.player.stock_menu()
-                    self.level.player.handle_stock_menu_input()
-                    self.level.player.get_stock_prices_text()
-                    self.level.player.update(dt)
+                    if self.level.player.show_stock_menu:
+                        self.level.player.stock_menu()
+                        self.level.player.handle_stock_menu_input()
+                        self.level.player.get_stock_prices_text()
+                        self.level.player.update(dt)
             else:
                 # show intro screen
                 show_intro_screen(self.screen, self.score)
