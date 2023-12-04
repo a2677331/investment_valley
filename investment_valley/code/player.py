@@ -291,6 +291,9 @@ class Player(pygame.sprite.Sprite):
                         pygame.K_5: 'UnitedHealth Group Inc (UNH)',
                     }
                     self.selected_stock = stock_options[event.key]
+                    # Clear the menu and display purchase prompt
+                    self.clear_menu()
+                    self.show_purchase_prompt = True
                 elif event.key == pygame.K_0:
                     # Clear the stock menu
                     self.clear_menu()
@@ -307,16 +310,12 @@ class Player(pygame.sprite.Sprite):
                 elif event.key == pygame.K_b:
                     # Clear the stock menu
                     self.clear_menu()
-                    # Display a purchase prompt
+                    # Display purchase prompt
                     self.show_purchase_prompt = True
 
         # Handle quantity input
-        if self.input_active:
+        if self.input_active and self.show_purchase_prompt:
             self.get_numeric_input()
-
-        # Handle years input
-        if self.show_purchase_prompt:
-
     # def prompt_quantity_input(self):
     #     # Set a flag to indicate that the program is waiting for quantity input
     #     self.input_active = True
