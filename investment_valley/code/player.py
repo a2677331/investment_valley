@@ -247,13 +247,13 @@ class Player(pygame.sprite.Sprite):
             text_position = (menu_rect.left + 20, menu_rect.top + 120)
             self.draw_text_multiline(prices_text, text_position, max_width=440, line_height=20)
     
-    def handle_buy_input(self):
-        # Handle the logic for buying the selected stock
-        quantity = int(input("Enter the quantity of stocks to purchase: "))
-        # Add your logic to update the player's balance and stocks_owned
-        print(f"Bought {quantity} stocks of {self.selected_stock}!")
-        # Reset selected_stock to None
-        self.selected_stock = None
+    # def handle_buy_input(self):
+    #     # Handle the logic for buying the selected stock
+    #     quantity = int(input("Enter the quantity of stocks to purchase: "))
+    #     # Add your logic to update the player's balance and stocks_owned
+    #     print(f"Bought {quantity} stocks of {self.selected_stock}!")
+    #     # Reset selected_stock to None
+    #     self.selected_stock = None
 
     def draw_text_multiline(self, text, position, max_width, line_height):
         font = pygame.font.Font(None, 24)  # Adjust the font size if needed
@@ -307,84 +307,84 @@ class Player(pygame.sprite.Sprite):
         if self.show_purchase_prompt:
             self.get_years_input()
 
-    def prompt_quantity_input(self):
-        # Set a flag to indicate that the program is waiting for quantity input
-        self.input_active = True
+    # def prompt_quantity_input(self):
+    #     # Set a flag to indicate that the program is waiting for quantity input
+    #     self.input_active = True
 
-        # Display a prompt message on the screen
-        self.show_purchase_prompt = True
+    #     # Display a prompt message on the screen
+    #     self.show_purchase_prompt = True
 
-    def get_numeric_input(self):
-        keys = pygame.key.get_pressed()
-        numeric_input = ""
+    # def get_numeric_input(self):
+    #     keys = pygame.key.get_pressed()
+    #     numeric_input = ""
 
-        for key in (K_0, K_1, K_2, K_3, K_4, K_5, K_6, K_7, K_8, K_9):
-            if keys[key]:
-                digit = key - K_0
-                numeric_input += str(digit)
+    #     for key in (K_0, K_1, K_2, K_3, K_4, K_5, K_6, K_7, K_8, K_9):
+    #         if keys[key]:
+    #             digit = key - K_0
+    #             numeric_input += str(digit)
 
-        # If Enter key is pressed, convert the numeric input to an integer
-        if keys[K_RETURN]:
-            if numeric_input:
-                try:
-                    # Convert numeric input to an integer and do further processing
-                    quantity = int(numeric_input)
-                    self.handle_quantity_input(quantity)
-                except ValueError:
-                    print("Invalid input. Please enter a valid number.")
+    #     # If Enter key is pressed, convert the numeric input to an integer
+    #     if keys[K_RETURN]:
+    #         if numeric_input:
+    #             try:
+    #                 # Convert numeric input to an integer and do further processing
+    #                 quantity = int(numeric_input)
+    #                 self.handle_quantity_input(quantity)
+    #             except ValueError:
+    #                 print("Invalid input. Please enter a valid number.")
                 
-            # Reset the flags after processing the input
-            self.input_active = False
-            self.show_purchase_prompt = False
+    #         # Reset the flags after processing the input
+    #         self.input_active = False
+    #         self.show_purchase_prompt = False
 
-        # Update the displayed quantity input in the game window
-        else:
-            self.quantity_input = numeric_input
+    #     # Update the displayed quantity input in the game window
+    #     else:
+    #         self.quantity_input = numeric_input
 
-    def handle_quantity_input(self, quantity):
-        # Your logic to handle the entered quantity
-        print(f"Entered quantity: {quantity}")
+    # def handle_quantity_input(self, quantity):
+    #     # Your logic to handle the entered quantity
+    #     print(f"Entered quantity: {quantity}")
 
-        # Further processing, for example, displaying future value or updating player's balance
-        future_value = self.calculate_future_value(self.selected_stock, 1, quantity)
-        print(f"Future value: {future_value}")
-        # Reset selected_stock to None
-        self.selected_stock = None
+    #     # Further processing, for example, displaying future value or updating player's balance
+    #     future_value = self.calculate_future_value(self.selected_stock, 1, quantity)
+    #     print(f"Future value: {future_value}")
+    #     # Reset selected_stock to None
+    #     self.selected_stock = None
 
-    def get_years_input(self):
-        keys = pygame.key.get_pressed()
+    # def get_years_input(self):
+    #     keys = pygame.key.get_pressed()
 
-        numeric_input = ""
-        for key in (K_0, K_1, K_2, K_3, K_4, K_5, K_6, K_7, K_8, K_9):
-            if keys[key]:
-                digit = key - K_0
-                numeric_input += str(digit)
+    #     numeric_input = ""
+    #     for key in (K_0, K_1, K_2, K_3, K_4, K_5, K_6, K_7, K_8, K_9):
+    #         if keys[key]:
+    #             digit = key - K_0
+    #             numeric_input += str(digit)
 
-        # If Enter key is pressed, convert the numeric input to an integer
-        if keys[K_RETURN]:
-            if numeric_input:
-                try:
-                    years_to_hold = int(numeric_input)
-                    future_value = self.calculate_future_value(self.selected_stock, years_to_hold, 1)
-                    self.display_future_value(years_to_hold, future_value)
-                    self.input_active = False  # Stop further input
-                except ValueError:
-                    print("Invalid input. Please enter a valid number.")
+    #     # If Enter key is pressed, convert the numeric input to an integer
+    #     if keys[K_RETURN]:
+    #         if numeric_input:
+    #             try:
+    #                 years_to_hold = int(numeric_input)
+    #                 future_value = self.calculate_future_value(self.selected_stock, years_to_hold, 1)
+    #                 self.display_future_value(years_to_hold, future_value)
+    #                 self.input_active = False  # Stop further input
+    #             except ValueError:
+    #                 print("Invalid input. Please enter a valid number.")
 
-        # Update the displayed quantity input in the game window
-        else:
-            self.quantity_input = numeric_input
+    #     # Update the displayed quantity input in the game window
+    #     else:
+    #         self.quantity_input = numeric_input
 
-    def show_purchase_options(self):
-        # Clear the menu and display purchase options
-        self.clear_menu()
-        text = f"You have selected {self.selected_stock}. How many years would you like to hold it? Enter the number and press Enter."
-        text_position = (400, 250)
-        self.draw_text(text, text_position)
+    # def show_purchase_options(self):
+    #     # Clear the menu and display purchase options
+    #     self.clear_menu()
+    #     text = f"You have selected {self.selected_stock}. How many years would you like to hold it? Enter the number and press Enter."
+    #     text_position = (400, 250)
+    #     self.draw_text(text, text_position)
 
-        # Get the quantity of stocks to purchase using Pygame's event handling
-        if self.input_active:
-            self.get_numeric_input()
+    #     # Get the quantity of stocks to purchase using Pygame's event handling
+    #     if self.input_active:
+    #         self.get_numeric_input()
 
     def show_stock_details(self, stock_name):
         self.selected_stock = stock_name
@@ -435,43 +435,43 @@ class Player(pygame.sprite.Sprite):
                 initial_price * (1 + fluctuation / 100), 2
             )
 
-    def calculate_future_value(self, stock_name, stock_type, years, quantity):
-        growth_rate = 0.0  # Default growth rate
+    # def calculate_future_value(self, stock_name, stock_type, years, quantity):
+    #     growth_rate = 0.0  # Default growth rate
 
-        if stock_type == 'Dividend':
-            # Dividends yield 3.5% of stock owned as income annually
-            dividend_yield = 0.035
-            annual_income = quantity * self.stock_prices[stock_name]['current_price'] * dividend_yield
-            future_value = quantity * (1 + growth_rate) ** years + annual_income
-        elif stock_type == 'Growth':
-            # Growth stocks grow fast (15%) a year but may have a huge dump in the case of a recession
-            growth_rate = 0.15
-            if random.random() < 0.1:  # 10% chance of a huge dump
-                growth_rate -= 0.45  # Reduce growth rate by 45% during a dump
-            future_value = quantity * (1 + growth_rate) ** years
-        elif stock_type == 'Penny Stock':
-            # Penny stocks lose a lot of money (sort of a lottery type of stock)
-            growth_rate = -0.2  # Placeholder, adjust as needed
-            future_value = quantity * (1 + growth_rate) ** years
-        elif stock_type == 'Defensive':
-            # Defensive stocks grow slow but often dont lose much value during economic downturn
-            growth_rate = 0.03
-            future_value = quantity * (1 + growth_rate) ** years
-        elif stock_type == 'ETF':
-            # ETFs grow about 10% over long periods of time
-            growth_rate = 0.10
-            future_value = quantity * (1 + growth_rate) ** years
-        else:
-            # Default growth for unknown stock types
-            future_value = quantity * (1 + growth_rate) ** years
+    #     if stock_type == 'Dividend':
+    #         # Dividends yield 3.5% of stock owned as income annually
+    #         dividend_yield = 0.035
+    #         annual_income = quantity * self.stock_prices[stock_name]['current_price'] * dividend_yield
+    #         future_value = quantity * (1 + growth_rate) ** years + annual_income
+    #     elif stock_type == 'Growth':
+    #         # Growth stocks grow fast (15%) a year but may have a huge dump in the case of a recession
+    #         growth_rate = 0.15
+    #         if random.random() < 0.1:  # 10% chance of a huge dump
+    #             growth_rate -= 0.45  # Reduce growth rate by 45% during a dump
+    #         future_value = quantity * (1 + growth_rate) ** years
+    #     elif stock_type == 'Penny Stock':
+    #         # Penny stocks lose a lot of money (sort of a lottery type of stock)
+    #         growth_rate = -0.2  # Placeholder, adjust as needed
+    #         future_value = quantity * (1 + growth_rate) ** years
+    #     elif stock_type == 'Defensive':
+    #         # Defensive stocks grow slow but often dont lose much value during economic downturn
+    #         growth_rate = 0.03
+    #         future_value = quantity * (1 + growth_rate) ** years
+    #     elif stock_type == 'ETF':
+    #         # ETFs grow about 10% over long periods of time
+    #         growth_rate = 0.10
+    #         future_value = quantity * (1 + growth_rate) ** years
+    #     else:
+    #         # Default growth for unknown stock types
+    #         future_value = quantity * (1 + growth_rate) ** years
 
-        return round(future_value, 2)
+    #     return round(future_value, 2)
     
-    # display the future value
-    def display_future_value(self, years_to_hold, future_value):
-        text = f"You have held the stock for {years_to_hold} years, and its future value is ${future_value:.2f}."
-        text_position = (400, 300)
-        self.draw_text(text, text_position)
+    # # display the future value
+    # def display_future_value(self, years_to_hold, future_value):
+    #     text = f"You have held the stock for {years_to_hold} years, and its future value is ${future_value:.2f}."
+    #     text_position = (400, 300)
+    #     self.draw_text(text, text_position)
 
     def draw_text(self, text, position, font_size=None):
         if font_size is not None:
