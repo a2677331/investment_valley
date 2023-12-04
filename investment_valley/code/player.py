@@ -171,6 +171,7 @@ class Player(pygame.sprite.Sprite):
                     self.rect.centery = self.hitbox.centery
                     self.pos.y = self.hitbox.centery
 
+
     def stock_menu(self):
         menu_rect = pygame.Rect(400, 200, 480, 400)
         pygame.draw.rect(self.display_surface, (0, 0, 0), menu_rect)
@@ -184,7 +185,9 @@ class Player(pygame.sprite.Sprite):
             text_position = (menu_rect.left + 20, menu_rect.top + 20)
             self.draw_text(f"Stock Type: {stock_type}", text_position)
             text_position = (menu_rect.left + 20, menu_rect.top + 60)
-            self.draw_text(f"Description: {stock_description}", text_position)
+            self.draw_text(f"Description:", text_position)
+            text_position = (menu_rect.left + 20, menu_rect.top + 100)
+            self.draw_text_multiline(stock_description, text_position, max_width=440, line_height=30)
 
         options = [
             "1. Buy CocaCola Stock (Dividend)",
@@ -196,8 +199,28 @@ class Player(pygame.sprite.Sprite):
         ]
 
         for i, option in enumerate(options):
-            text_position = (menu_rect.left + 20, menu_rect.top + 100 + i * 40)
+            text_position = (menu_rect.left + 20, menu_rect.top + 200 + i * 40)
             self.draw_text(option, text_position)
+
+    def draw_text_multiline(self, text, position, max_width, line_height):
+        font = pygame.font.Font(None, 24)  # Adjust the font size if needed
+        words = text.split(' ')
+        lines = []
+        current_line = ''
+        
+        for word in words:
+            test_line = current_line + word + ' '
+            if font.size(test_line)[0] <= max_width:
+                current_line = test_line
+            else:
+                lines.append(current_line)
+                current_line = word + ' '
+        
+        lines.append(current_line)
+
+        for i, line in enumerate(lines):
+            text_surface = font.render(line, True, (255, 255, 255))
+            self.display_surface.blit(text_surface, (position[0], position[1] + i * line_height))
 
     #handles the stock menu input
     def handle_stock_menu_input(self):
