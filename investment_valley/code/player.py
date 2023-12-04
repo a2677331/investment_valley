@@ -467,8 +467,6 @@ class Player(pygame.sprite.Sprite):
         pygame.display.flip()
         pygame.time.wait(5000)  # Wait for 5000 milliseconds (5 seconds)
 
-        # Clear the menu again if needed
-        self.clear_menu()
 
     def update_stock_prices(self):
         for stock_name, characteristics in self.stock_prices.items():
@@ -519,14 +517,36 @@ class Player(pygame.sprite.Sprite):
     #     text_position = (400, 300)
     #     self.draw_text(text, text_position)
 
-    def draw_text(self, text, position, font_size=None):
+    def draw_text(self, text, position, font_size=None, max_width=None):
         if font_size is not None:
             font = pygame.font.Font(None, font_size)
         else:
             font = self.font
-        
-        text_surface = font.render(text, True, (255, 255, 255))
-        self.display_surface.blit(text_surface, position)
+
+        # Split the text into lines based on word wrapping
+        words = text.split(' ')
+        lines = []
+        current_line = ''
+
+        for word in words:
+            test_line = current_line + word + ' '
+            if max_width is not None and font.size(test_line)[0] > max_width:
+                lines.append(current_line)
+                current_line = word + ' '
+            else:
+                current_line = test_line
+
+        lines.append(current_line)
+
+        # Render and display each line separately
+        for i, line in enumerate(lines):
+            text_surface = font.render(line, True, (255, 255, 255))
+            self.display_surface.blit(text_surface, (position[0], position[1] + i * 30))
+
+        # Update the game display
+        pygame.display.flip()
+
+
 
     def clear_menu(self):
         # Clear the menu by drawing a filled rectangle over it
