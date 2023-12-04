@@ -66,4 +66,9 @@ class Level:
             # Display stock prices on the screen
             self.player.get_stock_prices_text()
 
+        #Check if player is in bank
+        if self.player.in_bank_menu:
+            if self.player.show_bank_menu:
+                self.player.bank_menu()
+
         return display_status_bar(self.display_surface, start_time, self.money)
