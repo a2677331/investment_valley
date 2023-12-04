@@ -303,6 +303,7 @@ class Player(pygame.sprite.Sprite):
                     self.show_stock_menu = False
                     if self.show_purchase_prompt:
                         self.show_purchase_prompt = False
+                        self.input_active = True
 
         # uhandle quantity input
         if self.input_active:
