@@ -176,23 +176,27 @@ class Player(pygame.sprite.Sprite):
         pygame.draw.rect(self.display_surface, (0, 0, 0), menu_rect)
         pygame.draw.rect(self.display_surface, (255, 255, 255), menu_rect, 2)
 
-        # Display stock information
-        stock_name = self.selected_stock
-        stock_type = self.stock_types[stock_name]['type']
-        stock_description = self.stock_types[stock_name]['description']
-        stock_price = self.stock_prices[stock_name]['current_price']
+        if self.selected_stock:
+            stock_type = self.stock_types.get(self.selected_stock, {}).get('type', 'Unknown')
+            stock_description = self.stock_types.get(self.selected_stock, {}).get('description', 'No description available')
 
-        info_text = f"{stock_name} ({stock_type}): ${stock_price}\n\n{stock_description}"
-        self.draw_text(info_text, (menu_rect.left + 20, menu_rect.top + 20))
+            # Display stock type and description
+            text_position = (menu_rect.left + 20, menu_rect.top + 20)
+            self.draw_text(f"Stock Type: {stock_type}", text_position)
+            text_position = (menu_rect.left + 20, menu_rect.top + 60)
+            self.draw_text(f"Description: {stock_description}", text_position)
 
-        # Display purchase options
         options = [
-            "1. Buy",
+            "1. Buy CocaCola Stock (Dividend)",
+            "2. Buy Apple Stock (Growth)",
+            "3. Buy SPY Stock (ETF)",
+            "4. Buy NEWP Stock (Penny Stock)",
+            "5. Buy UNH Stock (Defensive)",
             "0. Exit Stock Menu"
         ]
 
         for i, option in enumerate(options):
-            text_position = (menu_rect.left + 20, menu_rect.top + 200 + i * 40)
+            text_position = (menu_rect.left + 20, menu_rect.top + 100 + i * 40)
             self.draw_text(option, text_position)
 
     #handles the stock menu input
