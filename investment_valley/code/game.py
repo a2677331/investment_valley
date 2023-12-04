@@ -51,8 +51,6 @@ class Game:
                 if keys[pygame.K_SPACE]:
                     self.game_active = True
 
-            # Render the level (and player) after the update
-            self.level.render(self.screen)
             pygame.display.update()  # update everything
 
 
