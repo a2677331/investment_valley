@@ -1,6 +1,7 @@
 import pygame, sys, random
 from support import *
 from pygame.locals import *
+import textwrap
 
 
 
@@ -226,7 +227,8 @@ class Player(pygame.sprite.Sprite):
         prices_text = ""
         for stock_name, characteristics in self.stock_prices.items():
             current_price = characteristics['current_price']
-            prices_text += f"{stock_name}: ${current_price}\n\n"  # Add a newline and extra space
+            stock_line = f"{stock_name}: ${current_price}"
+            prices_text += "\n".join(textwrap.wrap(stock_line, width=40)) + "\n\n"
 
         return prices_text
 
