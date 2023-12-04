@@ -375,10 +375,10 @@ class Player(pygame.sprite.Sprite):
         self.clear_menu()
 
         if stock_name == 'CocaCola (KO)':
-            message = "Congratulations! Coca Cola has netted you 7% returns over the last 5 years. Your earned $81!"
+            message = "Congratulations! Your earned $81!"
             self.earn_money(81)
         elif stock_name == 'Apple (AAPL)':
-            message = "Congratulations! Apple has performed terribly bad. Your lost $500!"
+            message = "OMG! Apple has performed terribly bad. Your lost $500!"
             self.earn_money(-500)
         elif stock_name == 'SPDR S&P 500 ETF Trust (SPY)':
             message = "Great choice! SPY, being an ETF, has provided steady growth of 10% over the last 5 years. You earned $661."
