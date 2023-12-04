@@ -276,8 +276,6 @@ class Player(pygame.sprite.Sprite):
             text_surface = font.render(line, True, (255, 255, 255))
             self.display_surface.blit(text_surface, (position[0], position[1] + i * line_height))
 
-
-    #handles the stock menu input
     def handle_stock_menu_input(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -318,6 +316,11 @@ class Player(pygame.sprite.Sprite):
         # Handle quantity input
         if self.input_active and self.show_purchase_prompt:
             self.get_numeric_input()
+
+        # Additional code to handle player movement
+        self.move(dt)
+
+
     # def prompt_quantity_input(self):
     #     # Set a flag to indicate that the program is waiting for quantity input
     #     self.input_active = True
