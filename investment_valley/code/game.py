@@ -23,7 +23,7 @@ class Game:
 
     def run(self):
         while True:
-            for event in pygame.event.get(): 
+            for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
@@ -40,6 +40,8 @@ class Game:
                     self.level.player.stock_menu()
                     self.level.player.handle_stock_menu_input()
                     self.level.player.get_stock_prices_text()
+                    self.level.player.update(dt)
+
             else:
                 # show intro screen
                 show_intro_screen(self.screen, self.score)
@@ -48,6 +50,7 @@ class Game:
                     self.game_active = True
 
             pygame.display.update()  # update everything
+
 
 
 if __name__ == '__main__':
