@@ -305,6 +305,9 @@ class Player(pygame.sprite.Sprite):
         # Handle quantity input
         if self.input_active and self.show_purchase_prompt:
             self.get_numeric_input()
+        # Ensure that the menu is not redrawn in the next iteration
+        if self.show_stock_menu or self.show_purchase_prompt:
+            return
 
 
     def close_stock_menu(self):
