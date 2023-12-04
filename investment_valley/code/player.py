@@ -296,6 +296,7 @@ class Player(pygame.sprite.Sprite):
                     self.show_purchase_prompt = True
                 elif event.key == pygame.K_0:
                     self.close_stock_menu()
+                    return  # Add return to exit the method and prevent further processing
                 elif event.key == pygame.K_b:
                     # Clear the stock menu
                     self.clear_menu()
