@@ -213,6 +213,14 @@ class Player(pygame.sprite.Sprite):
                 text_position = (menu_rect.left + 20, menu_rect.top + 150 + i * 30)
                 self.draw_text(option, text_position, font_size=18)
 
+    def handle_buy_input(self):
+        # Handle the logic for buying the selected stock
+        quantity = int(input("Enter the quantity of stocks to purchase: "))
+        # Add your logic to update the player's balance and stocks_owned
+        print(f"Bought {quantity} stocks of {self.selected_stock}!")
+        # Reset selected_stock to None
+        self.selected_stock = None
+
     def draw_text_multiline(self, text, position, max_width, line_height):
         font = pygame.font.Font(None, 24)  # Adjust the font size if needed
         words = text.split(' ')
@@ -338,9 +346,15 @@ class Player(pygame.sprite.Sprite):
 
         return round(future_value, 2)
 
-    def draw_text(self, text, position):
-        text_surface = self.font.render(text, True, (255, 255, 255))
-        self.display_surface.blit(text_surface, position)
+    def draw_text(self, text, position, font_size=None):
+        if font_size is not None:
+            font = pygame.font.Font(None, font_size)
+        else:
+            font = self.font
+        
+        text_surface = font.render(text, True, (255, 255, 255))
+        self.display_surface.blit(text_surface, position)update
+        
 
     def display_purchase_prompt(self):
         purchase_rect = pygame.Rect(400, 200, 480, 400)
