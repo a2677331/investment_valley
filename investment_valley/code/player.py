@@ -228,7 +228,7 @@ class Player(pygame.sprite.Sprite):
         for stock_name, characteristics in self.stock_prices.items():
             current_price = characteristics['current_price']
             stock_line = f"{stock_name}: ${current_price}"
-            prices_text += "\n".join(textwrap.wrap(stock_line, width=40)) + "\n\n"
+            prices_text += stock_line + "\n"
 
         return prices_text
 
