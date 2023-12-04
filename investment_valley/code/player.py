@@ -204,16 +204,18 @@ class Player(pygame.sprite.Sprite):
                 pygame.quit()
                 sys.exit()
             elif event.type == KEYDOWN:
-                # Check if a number key (1-5) is pressed to select a stock
-                if K_1 <= event.key <= K_5:
-                    stock_index = event.key - K_1
-                    stocks = list(self.stock_types.keys())
-                    self.selected_stock = stocks[stock_index]
-                elif event.key == K_6:
-                    self.show_purchase_prompt = True
-                elif event.key == K_7:
+                if event.key == K_1:
+                    self.selected_stock = 'CocaCola (KO)'
+                elif event.key == K_2:
+                    self.selected_stock = 'Apple (AAPL)'
+                elif event.key == K_3:
+                    self.selected_stock = 'SPDR S&P 500 ETF Trust (SPY)'
+                elif event.key == K_4:
+                    self.selected_stock = 'New Pacific Metals Corp (NEWP)'
+                elif event.key == K_5:
+                    self.selected_stock = 'UnitedHealth Group Inc (UNH)'
+                elif event.key == K_0:
                     self.show_stock_menu = False
-                elif event.key == K_RETURN:
                     if self.show_purchase_prompt:
                         # Buy the selected stock when Enter is pressed
                         self.buy_stock(self.selected_stock)
