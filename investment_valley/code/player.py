@@ -172,19 +172,39 @@ class Player(pygame.sprite.Sprite):
         pygame.draw.rect(self.display_surface, (0, 0, 0), menu_rect)
         pygame.draw.rect(self.display_surface, (255, 255, 255), menu_rect, 2)
 
+        # Display stock price and description for the selected stock
+        if self.selected_stock:
+            stock_name = self.selected_stock
+            stock_type = self.stock_types[stock_name]['type']
+            stock_description = self.stock_types[stock_name]['description']
+            price_text = f"Stock Type: {stock_type}\nDescription: {stock_description}"
+            text_position = (menu_rect.left + 20, menu_rect.top + 20)
+            self.draw_text(price_text, text_position)
+
+        # Display stock options (1-5)
         options = [
             f"1. Buy CocaCola Stock ({self.stock_types['CocaCola (KO)']['type']})",
             f"2. Buy Apple Stock ({self.stock_types['Apple (AAPL)']['type']})",
             f"3. Buy SPY Stock ({self.stock_types['SPDR S&P 500 ETF Trust (SPY)']['type']})",
             f"4. Buy NEWP Stock ({self.stock_types['New Pacific Metals Corp (NEWP)']['type']})",
-            f"5. Buy UNH Stock ({self.stock_types['UnitedHealth Group Inc (UNH)']['type']})",
-            "0. Exit Stock Menu"
+            f"5. Buy UNH Stock ({self.stock_types['UnitedHealth Group Inc (UNH)']['type']})"
         ]
 
         for i, option in enumerate(options):
-            text_position = (menu_rect.left + 20, menu_rect.top + 20 + i * 40)
+            text_position = (menu_rect.left + 20, menu_rect.top + 100 + i * 40)
             self.draw_text(option, text_position)
 
+        # Display purchase options
+        purchase_options = [
+            "6. Buy",
+            "7. Exit"
+        ]
+
+        for i, option in enumerate(purchase_options):
+            text_position = (menu_rect.left + 20, menu_rect.top + 300 + i * 40)
+            self.draw_text(option, text_position)
+
+    #handles the stock menu input
     def handle_stock_menu_input(self):
         keys = pygame.key.get_pressed()
 
@@ -193,24 +213,21 @@ class Player(pygame.sprite.Sprite):
                 pygame.quit()
                 sys.exit()
             elif event.type == KEYDOWN:
-                if event.key == K_1:
+                # Check if a number key (1-5) is pressed to select a stock
+                if K_1 <= event.key <= K_5:
+                    stock_index = event.key - K_1
+                    stocks = list(self.stock_types.keys())
+                    self.selected_stock = stocks[stock_index]
+                elif event.key == K_6:
                     self.show_purchase_prompt = True
-                    self.selected_stock = 'CocaCola (KO)'
-                elif event.key == K_2:
-                    # Similar changes for other options
-                    pass
-                elif event.key == K_0:
+                elif event.key == K_7:
                     self.show_stock_menu = False
-                    self.show_purchase_prompt = False
                 elif event.key == K_RETURN:
-                    if self.quantity_input:
-                        try:
-                            quantity = int(self.quantity_input)
-                            self.buy_stock(self.selected_stock, quantity)
-                            self.quantity_input = ""  # Reset the quantity input
-                            self.show_purchase_prompt = False
-                        except ValueError:
-                            print("Invalid quantity input. Please enter a valid number.")
+                    if self.show_purchase_prompt:
+                        # Buy the selected stock when Enter is pressed
+                        self.buy_stock(self.selected_stock)
+                        self.show_purchase_prompt = False
+
 
     def display_stock_prices(self):
         for i, (stock_name, characteristics) in enumerate(self.stock_prices.items()):
