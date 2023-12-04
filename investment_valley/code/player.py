@@ -189,18 +189,29 @@ class Player(pygame.sprite.Sprite):
             text_position = (menu_rect.left + 20, menu_rect.top + 100)
             self.draw_text_multiline(stock_description, text_position, max_width=440, line_height=30)
 
-        options = [
-            "1. Buy CocaCola Stock (Dividend)",
-            "2. Buy Apple Stock (Growth)",
-            "3. Buy SPY Stock (ETF)",
-            "4. Buy NEWP Stock (Penny Stock)",
-            "5. Buy UNH Stock (Defensive)",
-            "0. Exit Stock Menu"
-        ]
+            # Display buy option and handle input
+            buy_option = "Press 'B' to Buy"
+            text_position = (menu_rect.left + 20, menu_rect.bottom - 50)
+            self.draw_text(buy_option, text_position)
 
-        for i, option in enumerate(options):
-            text_position = (menu_rect.left + 20, menu_rect.top + 200 + i * 40)
-            self.draw_text(option, text_position)
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_b]:
+                self.handle_buy_input()
+
+        else:
+            # Display stock options
+            options = [
+                "1. Buy CocaCola Stock (Dividend)",
+                "2. Buy Apple Stock (Growth)",
+                "3. Buy SPY Stock (ETF)",
+                "4. Buy NEWP Stock (Penny Stock)",
+                "5. Buy UNH Stock (Defensive)",
+                "0. Exit Stock Menu"
+            ]
+
+            for i, option in enumerate(options):
+                text_position = (menu_rect.left + 20, menu_rect.top + 150 + i * 30)
+                self.draw_text(option, text_position, font_size=18)
 
     def draw_text_multiline(self, text, position, max_width, line_height):
         font = pygame.font.Font(None, 24)  # Adjust the font size if needed
