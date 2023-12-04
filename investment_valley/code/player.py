@@ -277,34 +277,23 @@ class Player(pygame.sprite.Sprite):
 
     #handles the stock menu input
     def handle_stock_menu_input(self):
-        keys = pygame.key.get_pressed()
-
         for event in pygame.event.get():
-            if event.type == QUIT:
+            if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            elif event.type == KEYDOWN:
-                if event.key == K_1:
-                    self.selected_stock = 'CocaCola (KO)'
+            elif event.type == pygame.KEYDOWN:
+                if event.key in (pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5):
+                    stock_options = {
+                        pygame.K_1: 'CocaCola (KO)',
+                        pygame.K_2: 'Apple (AAPL)',
+                        pygame.K_3: 'SPDR S&P 500 ETF Trust (SPY)',
+                        pygame.K_4: 'New Pacific Metals Corp (NEWP)',
+                        pygame.K_5: 'UnitedHealth Group Inc (UNH)',
+                    }
+                    self.selected_stock = stock_options[event.key]
                     self.show_purchase_options()
                     self.prompt_quantity_input()
-                elif event.key == K_2:
-                    self.selected_stock = 'Apple (AAPL)'
-                    self.show_purchase_options()
-                    self.prompt_quantity_input()
-                elif event.key == K_3:
-                    self.selected_stock = 'SPDR S&P 500 ETF Trust (SPY)'
-                    self.show_purchase_options()
-                    self.prompt_quantity_input()
-                elif event.key == K_4:
-                    self.selected_stock = 'New Pacific Metals Corp (NEWP)'
-                    self.show_purchase_options()
-                    self.prompt_quantity_input()
-                elif event.key == K_5:
-                    self.selected_stock = 'UnitedHealth Group Inc (UNH)'
-                    self.show_purchase_options()
-                    self.prompt_quantity_input()
-                elif event.key == K_0:
+                elif event.key == pygame.K_0:
                     self.show_stock_menu = False
                     if self.show_purchase_prompt:
                         self.show_purchase_prompt = False
