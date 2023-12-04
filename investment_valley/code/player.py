@@ -77,6 +77,8 @@ class Player(pygame.sprite.Sprite):
         # rendering-related attrributes
         self.display_surface = display_surface
         self.show_stock_menu = False
+        self.show_bank_menu = False
+        self.in_bank_menu = False
         self.font = pygame.font.Font(None, 36)
         self.quantity_input = ""  # Add this line to initialize quantity_input
 
@@ -137,7 +139,8 @@ class Player(pygame.sprite.Sprite):
             elif 1220 >= posX >= 960 and 250 >= posY >= 200:  ##Check if the player is near Casino building
                 print("Casino Area")
             elif 400 >= posX >= 250 and 680 >= posY >= 630:  # Check if the player is near Bank building
-                print("Bank Area")
+                self.in_bank_menu = True
+                self.show_bank_menu = True
             elif 1200 >= posX >= 980 and 700 >= posY >= 630:  # Check if the player is near Lottery building
                 print("Lottery Area")
 
@@ -145,6 +148,9 @@ class Player(pygame.sprite.Sprite):
             if 325 >= posX >= 115 and 250 >= posY >= 200 and self.in_stock_building and self.show_stock_menu:
                 self.in_stock_building = False
                 self.show_stock_menu = False
+            elif self.in_bank_menu:
+                self.in_bank_menu = False
+                self.show_bank_menu = False
 
     def get_status(self):
         # set status for idle animation
@@ -449,6 +455,13 @@ class Player(pygame.sprite.Sprite):
 
         text_position = (purchase_rect.left + 20, purchase_rect.top + 140)
         self.draw_text(self.quantity_input, text_position)
+
+    def bank_menu(self):
+        bank_menu_font = pygame.font.Font('../font/LycheeSoda.ttf',100)
+        menu_image = pygame.image.load('../graphics/world/BankMenu.png')
+        self.display_surface.blit(menu_image,(100,50))
+        balance_image = bank_menu_font.render("$"+str(self.money), True, (0,0,0))
+        self.display_surface.blit(balance_image, (470,600))
 
     def update(self, dt):
         self.input()
