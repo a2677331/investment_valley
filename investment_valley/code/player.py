@@ -200,6 +200,11 @@ class Player(pygame.sprite.Sprite):
                 self.handle_buy_input()
 
         else:
+            # Display stock prices directly above the stock options
+            stock_prices = self.get_stock_prices_text()
+            text_position = (menu_rect.left + 20, menu_rect.top + 150)
+            self.draw_text_multiline(stock_prices, text_position, max_width=440, line_height=30)
+            
             # Display stock options
             options = [
                 "1. Buy CocaCola Stock (Dividend)",
@@ -309,15 +314,6 @@ class Player(pygame.sprite.Sprite):
                 except ValueError:
                     print("Invalid input. Please enter a valid number.")
 
-                    
-        def display_stock_prices(self):
-            for i, (stock_name, characteristics) in enumerate(self.stock_prices.items()):
-                current_price = characteristics['current_price']
-                text = f"{stock_name}: ${current_price}"
-
-                # Display stock prices on the screen for each stock
-                text_position = (10, 10 + i * 20)
-                self.draw_text(text, text_position)
 
         def buy_stock(self, stock_name):
             stock_type = self.stock_types[stock_name]['type']
