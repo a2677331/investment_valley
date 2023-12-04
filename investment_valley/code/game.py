@@ -2,6 +2,7 @@ import pygame, sys
 from level import Level
 from settings import *
 from support import *
+from pygame.locals import *
 
 '''
 This file is about initial setup, 
@@ -21,18 +22,25 @@ class Game:
 
     def run(self):
         while True:
-            for event in pygame.event.get(): 
+            for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-                                
+
             if self.game_active:
                 # run the game
                 dt = self.clock.tick() / 1000
-                if self.level.run(dt, self.start_time)[0] <= 0: # if time is up, end the game
+
+                if self.level.run(dt, self.start_time)[0] <= 0:
                     self.game_active = False
                     self.start_time = int(pygame.time.get_ticks() / 1000) # reset the game start time
                     self.score = self.level.run(dt, self.start_time)[1]   # get money score from the game previusly played
+
+                if self.level.player.in_stock_building:
+                    self.level.player.stock_menu()
+                    self.level.player.handle_stock_menu_input()
+                    self.level.player.get_stock_prices_text()
+                    self.level.player.update(dt)
             else:
                 # show intro screen
                 show_intro_screen(self.screen, self.score)

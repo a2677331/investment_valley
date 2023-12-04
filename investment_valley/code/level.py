@@ -2,6 +2,8 @@ import pygame
 from player import Player
 from support import *
 from sprites import * 
+#IMPORT TEMPORARY
+import os
 
 '''
 This file is to draw the game layout
@@ -27,7 +29,15 @@ class Level:
 
     def setup(self):
         # background image
-        Generic((0,50), pygame.image.load("graphics/world/ground.png").convert_alpha(), self.all_sprites)
+        # THIS IS TEMPORARY CODE
+       # Get the absolute path to the 'ground.png' file
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        file_path = os.path.join(base_dir, "../../investment_valley/graphics/world/ground.png")
+        
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"Error: File not found - {file_path}")
+
+        Generic((0, 50), pygame.image.load(file_path).convert_alpha(), self.all_sprites)
 
         # buildings' position and size for collision detection
         building1_rect = pygame.Rect(130, 101, 179, 90)
@@ -38,10 +48,19 @@ class Level:
         buidling_rects = [building1_rect, building2_rect, building3_rect, building4_rect, building5_rect]
         
         # player
-        self.player = Player((640,360), self.all_sprites, buidling_rects)
+        self.player = Player((640,360), self.all_sprites, buidling_rects, self.display_surface)
 
     def run(self, dt, start_time):
         self.display_surface.fill("black") # so don't accidentally see previous frame
         self.all_sprites.draw(self.display_surface)
-        self.all_sprites.update(dt)
+        self.all_sprites.update(dt) # update every sprite in setup()
+
+        # Check if the player is in the stock building
+        if self.player.in_stock_building:
+            if self.player.show_stock_menu:
+                self.player.stock_menu()
+                self.player.handle_stock_menu_input()
+            # Display stock prices on the screen
+            self.player.get_stock_prices_text()
+
         return display_status_bar(self.display_surface, start_time, self.money)
