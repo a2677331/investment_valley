@@ -353,8 +353,8 @@ class Player(pygame.sprite.Sprite):
             font = self.font
         
         text_surface = font.render(text, True, (255, 255, 255))
-        self.display_surface.blit(text_surface, position)update
-        
+        self.display_surface.blit(text_surface, position)
+
 
     def display_purchase_prompt(self):
         purchase_rect = pygame.Rect(400, 200, 480, 400)
