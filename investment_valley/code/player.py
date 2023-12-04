@@ -219,24 +219,14 @@ class Player(pygame.sprite.Sprite):
                 text_position = (menu_rect.left + 20, menu_rect.top + 150 + i * 30)
                 self.draw_text(option, text_position, font_size=18)
 
-    def display_prices(self, multiline=True):
-        text_lines = []
-        for i, (stock_name, characteristics) in enumerate(self.stock_prices.items()):
+    def get_stock_prices_text(self):
+        prices_text = ""
+        for stock_name, characteristics in self.stock_prices.items():
             current_price = characteristics['current_price']
-            text = f"{stock_name}: ${current_price}"
+            prices_text += f"{stock_name}: ${current_price}\n"
+        
+        return prices_text
 
-            if multiline:
-                # Display stock prices on the screen for each stock
-                text_position = (10, 10 + i * 20)
-                self.draw_text(text, text_position)
-            else:
-                text_lines.append(text)
-
-        if not multiline:
-            # Display stock prices on the screen as multiline text
-            text_position = (10, 10)
-            self.draw_text_multiline('\n'.join(text_lines), text_position, max_width=440, line_height=20)
-            
     
     def handle_buy_input(self):
         # Handle the logic for buying the selected stock
