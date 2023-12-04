@@ -333,7 +333,8 @@ class Player(pygame.sprite.Sprite):
             if numeric_input:
                 try:
                     years_to_hold = int(numeric_input)
-                    self.display_future_value(years_to_hold)
+                    future_value = self.calculate_future_value(self.selected_stock, years_to_hold, 1)
+                    self.display_future_value(years_to_hold, future_value)
                     self.input_active = False  # Stop further input
 
                     # Now you can use the years_to_hold and quantity in your logic
@@ -441,6 +442,12 @@ class Player(pygame.sprite.Sprite):
             future_value = quantity * (1 + growth_rate) ** years
 
         return round(future_value, 2)
+    
+    # display the future value
+    def display_future_value(self, years_to_hold, future_value):
+        text = f"You have held the stock for {years_to_hold} years, and its future value is ${future_value:.2f}."
+        text_position = (400, 300)
+        self.draw_text(text, text_position)
 
     def draw_text(self, text, position, font_size=None):
         if font_size is not None:
