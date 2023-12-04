@@ -75,12 +75,6 @@ class Player(pygame.sprite.Sprite):
         self.font = pygame.font.Font(None, 36)
         self.quantity_input = ""  # Add this line to initialize quantity_input
 
-    def update_money_display(self):
-        money_text = f"Money: ${self.money}"
-        text_position = (10, 10)  # Adjust the position as needed
-        self.draw_text(money_text, text_position)
-
-
     def import_assets(self):
         self.animations = {'up': [], 'up_idle': [], 'down': [], 'down_idle': [], 'left': [], 'left_idle': [],
                            'right': [], 'right_idle': []}
