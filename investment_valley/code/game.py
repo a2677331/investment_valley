@@ -27,13 +27,18 @@ class Game:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-                                
+
             if self.game_active:
                 # run the game
                 dt = self.clock.tick() / 1000
-                if self.level.run(dt, self.start_time)[0] <= 0: # if time is up, end the game
+
+                # Update the player and level
+                self.level.player.update(dt)
+                self.level.update(dt)
+
+                if self.level.run(dt, self.start_time)[0] <= 0:
                     self.game_active = False
-                    self.start_time = int(pygame.time.get_ticks() / 1000) # reset start time
+                    self.start_time = int(pygame.time.get_ticks() / 1000)
 
                 if self.level.player.in_stock_building:
                     self.level.player.stock_menu()
@@ -45,8 +50,10 @@ class Game:
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_SPACE]:
                     self.game_active = True
-            
-            pygame.display.update() # update everything
+
+            # Render the level (and player) after the update
+            self.level.render(self.screen)
+            pygame.display.update()  # update everything
 
 
 if __name__ == '__main__':
