@@ -299,7 +299,7 @@ class Player(pygame.sprite.Sprite):
                     self.clear_menu()
                     self.show_stock_menu = False
                     self.show_purchase_prompt = False
-                    self.input_active = True`
+                    self.input_active = True
                 elif event.key == pygame.K_b:
                     # Clear the stock menu
                     self.clear_menu()
