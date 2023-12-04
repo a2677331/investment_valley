@@ -256,7 +256,7 @@ class Player(pygame.sprite.Sprite):
     #     # Reset selected_stock to None
     #     self.selected_stock = None
 
-    def draw_text_multiline(self, text, position, max_width, line_height):
+    def draw_text_multiline(self, text, position, max_width, line_height=30):
         font = pygame.font.Font(None, 24)  # Adjust the font size if needed
         words = text.split(' ')
         lines = []
@@ -275,6 +275,8 @@ class Player(pygame.sprite.Sprite):
         for i, line in enumerate(lines):
             text_surface = font.render(line, True, (255, 255, 255))
             self.display_surface.blit(text_surface, (position[0], position[1] + i * line_height))
+
+        pygame.display.flip()
 
     #handles the stock menu input
     def handle_stock_menu_input(self):
