@@ -461,11 +461,12 @@ class Player(pygame.sprite.Sprite):
 
         # Display the message on the game surface
         text_position = (400, 250)  # Adjust the position as needed
-        self.draw_text(message, text_position)
+        max_width = 400
+        self.draw_text_multiline(message, text_position, max_width=max_width)
 
         # Update the game display
         pygame.display.flip()
-        pygame.time.wait(5000)  # Wait for 5000 milliseconds (5 seconds)
+        pygame.time.wait(10000)  # Wait for 5000 milliseconds (5 seconds)
 
 
     def update_stock_prices(self):
