@@ -49,9 +49,9 @@ class Level:
         
         # player
         self.player = Player((640,360), self.all_sprites, buidling_rects, self.display_surface)
-                             
+
     def run(self, dt, start_time):
-        self.display_surface.fill("black")
+        self.display_surface.fill("black") # so don't accidentally see previous frame
         self.all_sprites.draw(self.display_surface)
         self.all_sprites.update(dt) # update every sprite in setup()
 
@@ -64,4 +64,3 @@ class Level:
             self.player.get_stock_prices_text()
 
         return display_status_bar(self.display_surface, start_time, self.money)
-

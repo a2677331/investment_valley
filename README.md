@@ -14,6 +14,7 @@ CINF-405 Team Project
 - [ ] functions for casino, lottery, bank (Aidan)
 
 ## Done: 
+- [x] Initial running the game will display an intro screen without a money score, while subsequent runs will show both the introduction screen with the money score from previously played
 - [x] player can "talk" to building (Dylan)
 - [x] added a money score in the top bar
 - [x] set a timer for 5 min
