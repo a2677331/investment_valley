@@ -305,10 +305,7 @@ class Player(pygame.sprite.Sprite):
         # Handle quantity input
         if self.input_active:
             self.get_numeric_input()
-
-        # Handle years input
-        if self.show_purchase_prompt:
-            self.get_years_input()
+            
 
     # def prompt_quantity_input(self):
     #     # Set a flag to indicate that the program is waiting for quantity input
