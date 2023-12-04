@@ -317,8 +317,6 @@ class Player(pygame.sprite.Sprite):
         if self.input_active and self.show_purchase_prompt:
             self.get_numeric_input()
 
-        # Additional code to handle player movement
-        self.move(dt)
 
 
     # def prompt_quantity_input(self):
