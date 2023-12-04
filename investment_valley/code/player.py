@@ -396,6 +396,11 @@ class Player(pygame.sprite.Sprite):
         balance_image = bank_menu_font.render("$"+str(self.money), True, (0,0,0))
         self.display_surface.blit(balance_image, (470,600))
 
+    def earn_bank_interest(self):
+        #Give the player 5% interest on their money if they have money in their bank account
+        if self.money>0:
+            self.money=self.money+self.money*0.05
+    
     def update(self, dt):
         self.input()
         self.get_status()
