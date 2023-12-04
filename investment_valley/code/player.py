@@ -1,9 +1,13 @@
 import pygame, sys, random
-from support import *https://github.com/a2677331/investment_valley/pull/4/conflict?name=investment_valley%252Fcode%252Fplayer.py&ancestor_oid=5fc770652305786e796a6cb1d8ab55908ecaeb35&base_oid=2f89d104781dfbbb89a772636f0f4c6a1ee44738&head_oid=e8e010d70c0955ad34bde77fac14fb15ee9e8bf8
+from support import *
 from pygame.locals import *
 import textwrap
 import os
 
+
+# find the system path
+current_file_path = os.path.abspath(__file__)
+grandparent_file_path = os.path.dirname(os.path.dirname(current_file_path))
 
 
 '''
@@ -75,9 +79,6 @@ class Player(pygame.sprite.Sprite):
         self.quantity_input = ""  # Add this line to initialize quantity_input
 
     def import_assets(self):
-        current_file_path = os.path.abspath(__file__)
-        grandparent_file_path = os.path.dirname(os.path.dirname(current_file_path))
-
         self.animations = {'up': [], 'up_idle': [], 'down': [], 'down_idle': [], 'left': [], 'left_idle': [],
                            'right': [], 'right_idle': []}
 
@@ -389,8 +390,8 @@ class Player(pygame.sprite.Sprite):
         self.draw_text(self.quantity_input, text_position)
 
     def bank_menu(self):
-        bank_menu_font = pygame.font.Font('../font/LycheeSoda.ttf',100)
-        menu_image = pygame.image.load('../graphics/world/BankMenu.png')
+        bank_menu_font = pygame.font.Font(f'{grandparent_file_path}/font/LycheeSoda.ttf', 100)
+        menu_image = pygame.image.load(f'{grandparent_file_path}/graphics/world/BankMenu.png')
         self.display_surface.blit(menu_image,(100,50))
         balance_image = bank_menu_font.render("$"+str(self.money), True, (0,0,0))
         self.display_surface.blit(balance_image, (470,600))
