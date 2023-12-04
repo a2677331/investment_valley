@@ -202,8 +202,8 @@ class Player(pygame.sprite.Sprite):
         else:
             # Display stock prices directly above the stock options
             stock_prices = self.get_stock_prices_text()
-            text_position = (menu_rect.left + 20, menu_rect.top + 150)
-            self.draw_text_multiline(stock_prices, text_position, max_width=440, line_height=30)
+            prices_text_position = (menu_rect.left + 20, menu_rect.top + 20)
+            self.draw_text_multiline(stock_prices, prices_text_position, max_width=440, line_height=30)
 
             # Display stock options
             options = [
