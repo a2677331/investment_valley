@@ -255,19 +255,7 @@ class Player(pygame.sprite.Sprite):
 
     def draw_text_multiline(self, text, position, max_width, line_height):
         font = pygame.font.Font(None, 24)  # Adjust the font size if needed
-        words = text.split(' ')
-        lines = []
-        current_line = ''
-        
-        for word in words:
-            test_line = current_line + word + ' '
-            if font.size(test_line)[0] <= max_width:
-                current_line = test_line
-            else:
-                lines.append(current_line)
-                current_line = word + ' '
-        
-        lines.append(current_line)
+        lines = text.splitlines()
 
         for i, line in enumerate(lines):
             text_surface = font.render(line, True, (255, 255, 255))
