@@ -35,6 +35,7 @@ class Game:
                     self.game_active = False
                     self.start_time = int(pygame.time.get_ticks() / 1000) # reset the game start time
                     self.score = self.level.run(dt, self.start_time)[1]   # get money score from the game previusly played
+                    self.level.player.earn_bank_interest() #Gives the player interest on their money upon daily reset
 
                 if self.level.player.in_stock_building:
                     if self.level.player.show_stock_menu:
