@@ -291,8 +291,6 @@ class Player(pygame.sprite.Sprite):
                         pygame.K_5: 'UnitedHealth Group Inc (UNH)',
                     }
                     self.selected_stock = stock_options[event.key]
-                    self.show_purchase_options()
-                    self.prompt_quantity_input()
                 elif event.key == pygame.K_0:
                     self.show_stock_menu = False
                     if self.show_purchase_prompt:
@@ -381,7 +379,6 @@ class Player(pygame.sprite.Sprite):
          text = f"You have selected {self.selected_stock}. How many years would you like to hold it? Enter the number and press Enter."
          text_position = (400, 250)
          self.draw_text(text, text_position)
-
          # Get the quantity of stocks to purchase using Pygame's event handling
          if self.input_active:
              self.get_numeric_input()
