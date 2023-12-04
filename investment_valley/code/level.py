@@ -39,10 +39,9 @@ class Level:
         
         # player
         self.player = Player((640,360), self.all_sprites, buidling_rects)
-                             
-    def run(self, dt, start_time):
-        self.display_surface.fill("black")
-        self.all_sprites.draw(self.display_surface)
-        self.all_sprites.update(dt) # update every sprite in setup()
-        return display_status_bar(self.display_surface, start_time, self.money)
 
+    def run(self, dt, start_time):
+        self.display_surface.fill("black") # so don't accidentally see previous frame
+        self.all_sprites.draw(self.display_surface)
+        self.all_sprites.update(dt)
+        return display_status_bar(self.display_surface, start_time, self.money)
