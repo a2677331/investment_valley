@@ -276,7 +276,6 @@ class Player(pygame.sprite.Sprite):
             text_surface = font.render(line, True, (255, 255, 255))
             self.display_surface.blit(text_surface, (position[0], position[1] + i * line_height))
 
-        pygame.display.flip()
 
     #handles the stock menu input
     def handle_stock_menu_input(self):
