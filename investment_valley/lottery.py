@@ -34,11 +34,10 @@ def play_lottery(level_instance, balance):
     # Update the balance in the Level instance
     level_instance.money = balance
 
-    # No need to print to console anymore
     # print("After lottery, balance:", balance)
 
 def display_message(level_instance, message):
-    # Display a message on the screen with an opaque grey rectangle
+    # Display a message on the screen
     font = pygame.font.Font(None, 36)
 
     # Create a surface for the text
@@ -47,7 +46,7 @@ def display_message(level_instance, message):
     # Create a surface for the rectangle
     rect_surface = pygame.Surface((text_surface.get_width() + 20, text_surface.get_height() + 20))
     rect_surface.set_alpha(128)  # Set alpha for opacity
-    rect_surface.fill((128, 128, 128))  # Fill with grey color
+    rect_surface.fill((128, 128, 128))  # Fill with grey 
 
     # Get the rectangle and text positions
     rect_position = (level_instance.display_surface.get_width() // 2 - rect_surface.get_width() // 2, level_instance.display_surface.get_height() // 2 - rect_surface.get_height() // 2)
@@ -58,7 +57,7 @@ def display_message(level_instance, message):
     level_instance.display_surface.blit(text_surface, text_position)
 
     pygame.display.flip()
-    pygame.time.wait(750)  # Display the message for 750 milliseconds (3/4 seconds)
+    pygame.time.wait(750)  # Display the message for 750 ms
 
 
 
