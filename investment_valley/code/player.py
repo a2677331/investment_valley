@@ -469,6 +469,46 @@ class Player(pygame.sprite.Sprite):
         menu_rect = pygame.Rect(400, 200, 480, 400)
         pygame.draw.rect(self.display_surface, (0, 0, 0), menu_rect)
 
+    def handle_buy_input(self):
+        # Show the purchase prompt
+        self.show_purchase_prompt = True
+
+    def handle_purchase_prompt_input(self, event):
+        keys = pygame.key.get_pressed()
+
+        # Handle numeric input for quantity
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RETURN:
+                if self.quantity_input:
+                    try:
+                        quantity = int(self.quantity_input)
+                        future_value = self.calculate_future_value(self.selected_stock, 1, quantity)
+                        self.display_future_value(1, future_value)
+                        # Reset selected_stock to None and hide purchase prompt
+                        self.selected_stock = None
+                        self.show_purchase_prompt = False
+                    except ValueError:
+                        print("Invalid input. Please enter a valid number.")
+            elif event.key == pygame.K_BACKSPACE:
+                # Handle backspace to delete the last digit
+                self.quantity_input = self.quantity_input[:-1]
+            elif event.key in (pygame.K_0, pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5, pygame.K_6, pygame.K_7, pygame.K_8, pygame.K_9):
+                # Handle numeric input
+                digit = event.key - pygame.K_0
+                self.quantity_input += str(digit)
+
+    def update(self, dt):
+        self.handle_stock_menu_input()
+
+        if self.show_purchase_prompt:
+            # Handle input for the purchase prompt
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == pygame.KEYDOWN:
+                    self.handle_purchase_prompt_input(event)
+                    
     def display_purchase_prompt(self):
         purchase_rect = pygame.Rect(400, 200, 480, 400)
         pygame.draw.rect(self.display_surface, (0, 0, 0), purchase_rect)
