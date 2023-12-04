@@ -222,6 +222,7 @@ class Player(pygame.sprite.Sprite):
                 text_position = (menu_rect.left + 20, menu_rect.top + 150 + i * 30)
                 self.draw_text(option, text_position, font_size=18)
 
+
     def get_stock_prices_text(self):
         if self.stock_prices is None:
             return ""
@@ -394,6 +395,8 @@ class Player(pygame.sprite.Sprite):
     #      if self.input_active:
     #          self.get_numeric_input()
 
+
+
     def show_stock_details(self, stock_name):
         self.selected_stock = stock_name
         stock_type = self.stock_types[stock_name]['type']
@@ -430,6 +433,31 @@ class Player(pygame.sprite.Sprite):
             self.stocks_owned[stock_name] += quantity
         else:
             print("Insufficient funds!")
+
+    def handle_buy_input(self):
+        # Display the performance message for the selected stock
+        stock_name = self.selected_stock
+        self.display_stock_performance(stock_name)
+
+        # Reset selected_stock to None
+        self.selected_stock = None
+
+    def display_stock_performance(self, stock_name):
+        if stock_name == 'CocaCola (KO)':
+            message = "Congratulations! Coca Cola has netted you 7% returns over the last 5 years. Your investment is now worth $81.35."
+        elif stock_name == 'Apple (AAPL)':
+            message = "Congratulations! Apple has performed exceptionally well, with a growth of 15% over the last 5 years. Your investment is now worth $224.64."
+        elif stock_name == 'SPDR S&P 500 ETF Trust (SPY)':
+            message = "Great choice! SPY, being an ETF, has provided steady growth of 10% over the last 5 years. Your investment is now worth $661.74."
+        elif stock_name == 'New Pacific Metals Corp (NEWP)':
+            message = "It's a gamble! NEWP, being a penny stock, has shown volatility. Your investment is now worth $1.43 after 5 years."
+        elif stock_name == 'UnitedHealth Group Inc (UNH)':
+            message = "Steady and safe! UNH, being a defensive stock, has grown by 3% over the last 5 years. Your investment is now worth $564.63."
+        else:
+            message = "Unknown stock selected."
+
+        # Display the message
+        print(message)
 
     def update_stock_prices(self):
         for stock_name, characteristics in self.stock_prices.items():
