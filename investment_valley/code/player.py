@@ -292,20 +292,30 @@ class Player(pygame.sprite.Sprite):
                     }
                     self.selected_stock = stock_options[event.key]
                 elif event.key == pygame.K_0:
+                    # Clear the stock menu
+                    self.clear_menu()
+                    # Display a message on the empty menu
+                    message = "You exited the stock menu."
+                    text_position = (400, 250)
+                    self.draw_text(message, text_position)
+                    pygame.display.flip()
+                    pygame.time.wait(2000)  # Wait for 2000 milliseconds (2 seconds)
                     self.show_stock_menu = False
                     if self.show_purchase_prompt:
                         self.show_purchase_prompt = False
                         self.input_active = True
                 elif event.key == pygame.K_b:
-                   # Clear the stock menu
-                   self.clear_menu()
-                   # Display a purchase prompt
-                   self.show_purchase_prompt = True
+                    # Clear the stock menu
+                    self.clear_menu()
+                    # Display a purchase prompt
+                    self.show_purchase_prompt = True
 
         # Handle quantity input
         if self.input_active:
             self.get_numeric_input()
-            
+
+        # Handle years input
+        if self.show_purchase_prompt:
 
     # def prompt_quantity_input(self):
     #     # Set a flag to indicate that the program is waiting for quantity input
@@ -393,7 +403,6 @@ class Player(pygame.sprite.Sprite):
         print(f"Stock Type: {stock_type}")
         print(f"Description: {stock_description}")
 
-        # Add code to clear the menu and display purchase options
         self.show_purchase_options(stock_name)
 
 
