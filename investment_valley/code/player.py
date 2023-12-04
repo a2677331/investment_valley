@@ -17,9 +17,13 @@ class Player(pygame.sprite.Sprite):
         self.frame_index = 0
         self.buidling_rects = buidling_rects
 
-        # New attributes for purchase flow
+        # attributes for purchase flow
         self.show_purchase_prompt = False
         self.selected_stock = None
+
+        # attributes for input handling
+        self.selected_stock = None
+        self.input_active = False
 
         # general setup
         self.image = self.animations[self.status][self.frame_index]
@@ -267,41 +271,82 @@ class Player(pygame.sprite.Sprite):
                         self.buy_stock(self.selected_stock)
                         self.show_purchase_prompt = False
 
-
-    def display_stock_prices(self):
-        for i, (stock_name, characteristics) in enumerate(self.stock_prices.items()):
-            current_price = characteristics['current_price']
-            text = f"{stock_name}: ${current_price}"
-
-            # Display stock prices on the screen for each stock
-            text_position = (10, 10 + i * 20)
-            self.draw_text(text, text_position)
-
-    def buy_stock(self, stock_name):
+    def show_stock_details(self, stock_name):
+        self.selected_stock = stock_name
         stock_type = self.stock_types[stock_name]['type']
         stock_description = self.stock_types[stock_name]['description']
 
         print(f"Stock Type: {stock_type}")
         print(f"Description: {stock_description}")
 
-        quantity = int(input("Enter the quantity of stocks to purchase: "))
+        # Add code to clear the menu and display purchase options
+        self.show_purchase_options(stock_name)
 
-        # Use the fluctuation range to determine the number of years to hold
-        fluctuation_range = self.stock_prices[stock_name]['fluctuation_range']
-        years_to_hold = random.uniform(*fluctuation_range)
+    def show_purchase_options(self, stock_name):
+        # Clear the menu and display purchase options
+        self.clear_menu()
+        text = f"You have selected {stock_name}. How many years would you like to hold it? Enter the number and press Enter."
+        text_position = (400, 250)
+        self.draw_text(text, text_position)
 
-        # Get the current stock price from the data
-        stock_price = self.stock_prices[stock_name]['current_price']
+        # Get the quantity of stocks to purchase using Pygame's event handling
+        if self.input_active:
+            self.get_numeric_input()
 
-        future_value = self.calculate_future_value(stock_type, years_to_hold, quantity)
-        print(f"Future Value after {years_to_hold:.2f} years: ${future_value}")
+    def get_numeric_input(self):
+        keys = pygame.key.get_pressed()
+        numeric_input = ""
 
-        total_cost = stock_price * quantity
-        if self.money >= total_cost:
-            self.money -= total_cost
-            self.stocks_owned[stock_name] += quantity
-        else:
-            print("Insufficient funds!")
+        for key in (K_0, K_1, K_2, K_3, K_4, K_5, K_6, K_7, K_8, K_9):
+            if keys[key]:
+                digit = key - K_0
+                numeric_input += str(digit)
+
+        # If Enter key is pressed, convert the numeric input to an integer
+        if keys[K_RETURN]:
+            if numeric_input:
+                try:
+                    years_to_hold = int(numeric_input)
+                    self.display_future_value(years_to_hold)
+                    self.input_active = False  # Stop further input
+                except ValueError:
+                    print("Invalid input. Please enter a valid number.")
+
+                    
+        def display_stock_prices(self):
+            for i, (stock_name, characteristics) in enumerate(self.stock_prices.items()):
+                current_price = characteristics['current_price']
+                text = f"{stock_name}: ${current_price}"
+
+                # Display stock prices on the screen for each stock
+                text_position = (10, 10 + i * 20)
+                self.draw_text(text, text_position)
+
+        def buy_stock(self, stock_name):
+            stock_type = self.stock_types[stock_name]['type']
+            stock_description = self.stock_types[stock_name]['description']
+
+            print(f"Stock Type: {stock_type}")
+            print(f"Description: {stock_description}")
+
+            quantity = int(input("Enter the quantity of stocks to purchase: "))
+
+            # Use the fluctuation range to determine the number of years to hold
+            fluctuation_range = self.stock_prices[stock_name]['fluctuation_range']
+            years_to_hold = random.uniform(*fluctuation_range)
+
+            # Get the current stock price from the data
+            stock_price = self.stock_prices[stock_name]['current_price']
+
+            future_value = self.calculate_future_value(stock_type, years_to_hold, quantity)
+            print(f"Future Value after {years_to_hold:.2f} years: ${future_value}")
+
+            total_cost = stock_price * quantity
+            if self.money >= total_cost:
+                self.money -= total_cost
+                self.stocks_owned[stock_name] += quantity
+            else:
+                print("Insufficient funds!")
 
     def update_stock_prices(self):
         for stock_name, characteristics in self.stock_prices.items():
@@ -355,6 +400,10 @@ class Player(pygame.sprite.Sprite):
         text_surface = font.render(text, True, (255, 255, 255))
         self.display_surface.blit(text_surface, position)
 
+    def clear_menu(self):
+        # Clear the menu by drawing a filled rectangle over it
+        menu_rect = pygame.Rect(400, 200, 480, 400)
+        pygame.draw.rect(self.display_surface, (0, 0, 0), menu_rect)
 
     def display_purchase_prompt(self):
         purchase_rect = pygame.Rect(400, 200, 480, 400)
