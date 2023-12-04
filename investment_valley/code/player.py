@@ -295,11 +295,7 @@ class Player(pygame.sprite.Sprite):
                     self.clear_menu()
                     self.show_purchase_prompt = True
                 elif event.key == pygame.K_0:
-                    # Clear the stock menu and close it completely
-                    self.clear_menu()
-                    self.show_stock_menu = False
-                    self.show_purchase_prompt = False
-                    self.input_active = False
+                    self.close_stock_menu()
                 elif event.key == pygame.K_b:
                     # Clear the stock menu
                     self.clear_menu()
@@ -311,6 +307,11 @@ class Player(pygame.sprite.Sprite):
             self.get_numeric_input()
 
 
+    def close_stock_menu(self):
+        self.clear_menu()
+        self.show_stock_menu = False
+        self.show_purchase_prompt = False
+        self.input_active = False
 
     # def prompt_quantity_input(self):
     #     # Set a flag to indicate that the program is waiting for quantity input
