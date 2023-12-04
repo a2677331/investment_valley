@@ -177,18 +177,17 @@ class Player(pygame.sprite.Sprite):
 
 
     def stock_menu(self):
-        def stock_menu(self):
-            menu_rect = pygame.Rect(400, 200, 480, 400)
-            pygame.draw.rect(self.display_surface, (0, 0, 0), menu_rect)
-            pygame.draw.rect(self.display_surface, (255, 255, 255), menu_rect, 2)
+        menu_rect = pygame.Rect(400, 200, 480, 400)
+        pygame.draw.rect(self.display_surface, (0, 0, 0), menu_rect)
+        pygame.draw.rect(self.display_surface, (255, 255, 255), menu_rect, 2)
 
-            # Draw close button
-            close_button_rect = pygame.Rect(menu_rect.right - 20, menu_rect.top + 5, 15, 15)
-            pygame.draw.rect(self.display_surface, (255, 0, 0), close_button_rect)
-            pygame.draw.line(self.display_surface, (255, 255, 255), (close_button_rect.right, close_button_rect.top),
-                            (close_button_rect.left, close_button_rect.bottom), 2)
-            pygame.draw.line(self.display_surface, (255, 255, 255), (close_button_rect.left, close_button_rect.top),
-                            (close_button_rect.right, close_button_rect.bottom), 2)
+        # Draw close button
+        close_button_rect = pygame.Rect(menu_rect.right - 20, menu_rect.top + 5, 15, 15)
+        pygame.draw.rect(self.display_surface, (255, 0, 0), close_button_rect)
+        pygame.draw.line(self.display_surface, (255, 255, 255), (close_button_rect.right, close_button_rect.top),
+                        (close_button_rect.left, close_button_rect.bottom), 2)
+        pygame.draw.line(self.display_surface, (255, 255, 255), (close_button_rect.left, close_button_rect.top),
+                        (close_button_rect.right, close_button_rect.bottom), 2)
 
         if self.selected_stock:
             stock_type = self.stock_types.get(self.selected_stock, {}).get('type', 'Unknown')
