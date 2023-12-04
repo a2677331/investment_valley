@@ -22,6 +22,7 @@ class Player(pygame.sprite.Sprite):
         self.show_purchase_prompt = False
         self.selected_stock = None
         self.input_active = False
+        self.quantity_input = ""
 
         # general setup
         self.image = self.animations[self.status][self.frame_index]
@@ -285,20 +286,60 @@ class Player(pygame.sprite.Sprite):
             elif event.type == KEYDOWN:
                 if event.key == K_1:
                     self.selected_stock = 'CocaCola (KO)'
+                    self.show_purchase_options()
                 elif event.key == K_2:
                     self.selected_stock = 'Apple (AAPL)'
+                    self.show_purchase_options()
                 elif event.key == K_3:
                     self.selected_stock = 'SPDR S&P 500 ETF Trust (SPY)'
+                    self.show_purchase_options()
                 elif event.key == K_4:
                     self.selected_stock = 'New Pacific Metals Corp (NEWP)'
+                    self.show_purchase_options()
                 elif event.key == K_5:
                     self.selected_stock = 'UnitedHealth Group Inc (UNH)'
+                    self.show_purchase_options()
                 elif event.key == K_0:
                     self.show_stock_menu = False
                     if self.show_purchase_prompt:
-                        # Buy the selected stock when Enter is pressed
-                        self.buy_stock(self.selected_stock)
                         self.show_purchase_prompt = False
+
+        # uhandle quantity input
+        if self.input_active:
+            self.get_numeric_input()
+
+    def show_purchase_options(self):
+        # Clear the menu and display purchase options
+        self.clear_menu()
+        text = f"You have selected {self.selected_stock}. How many years would you like to hold it? Enter the number and press Enter."
+        text_position = (400, 250)
+        self.draw_text(text, text_position)
+
+        # Get the quantity of stocks to purchase using Pygame's event handling
+        if self.input_active:
+            self.get_numeric_input()
+
+    def get_numeric_input(self):
+        keys = pygame.key.get_pressed()
+        numeric_input = ""
+
+        for key in (K_0, K_1, K_2, K_3, K_4, K_5, K_6, K_7, K_8, K_9):
+            if keys[key]:
+                digit = key - K_0
+                numeric_input += str(digit)
+
+        # If Enter key is pressed, convert the numeric input to an integer
+        if keys[K_RETURN]:
+            if numeric_input:
+                try:
+                    years_to_hold = int(numeric_input)
+                    self.display_future_value(years_to_hold)
+                    self.input_active = False  # Stop further input
+
+                    # Now you can use the years_to_hold and quantity in your logic
+                except ValueError:
+                    print("Invalid input. Please enter a valid number.")
+
 
     def show_stock_details(self, stock_name):
         self.selected_stock = stock_name
