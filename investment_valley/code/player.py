@@ -20,9 +20,6 @@ class Player(pygame.sprite.Sprite):
         # attributes for purchase flow
         self.show_purchase_prompt = False
         self.selected_stock = None
-
-        # attributes for input handling
-        self.selected_stock = None
         self.input_active = False
 
         # general setup
