@@ -312,7 +312,7 @@ class Player(pygame.sprite.Sprite):
 
 
     def close_stock_menu(self):
-        self.clear_menu()
+        #self.clear_menu()
         self.show_stock_menu = False
         self.show_purchase_prompt = False
         self.input_active = False
