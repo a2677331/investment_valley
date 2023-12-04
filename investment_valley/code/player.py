@@ -1,5 +1,5 @@
 import pygame, sys, random
-from support import *
+from support import *https://github.com/a2677331/investment_valley/pull/4/conflict?name=investment_valley%252Fcode%252Fplayer.py&ancestor_oid=5fc770652305786e796a6cb1d8ab55908ecaeb35&base_oid=2f89d104781dfbbb89a772636f0f4c6a1ee44738&head_oid=e8e010d70c0955ad34bde77fac14fb15ee9e8bf8
 from pygame.locals import *
 import textwrap
 import os
@@ -42,14 +42,6 @@ class Player(pygame.sprite.Sprite):
         self.in_stock_building = False
         self.show_purchase_prompt = False
         self.money = starting_balance
-
-        self.stocks_owned = {
-            'CocaCola (KO)': 0,
-            'Apple (AAPL)': 0,
-            'SPDR S&P 500 ETF Trust (SPY)': 0,
-            'New Pacific Metals Corp (NEWP)': 0,
-            'UnitedHealth Group Inc (UNH)': 0
-        }
 
         # the different stock types the player can choose from/description of each
         self.stock_types = {
@@ -227,22 +219,28 @@ class Player(pygame.sprite.Sprite):
             # Display stock prices directly above the stock options
             stock_prices = self.get_stock_prices_text()
             prices_text_position = (menu_rect.left + 20, menu_rect.top + 20)
-            self.draw_text_multiline(stock_prices, prices_text_position, max_width=440, line_height=30)
+            self.draw_stock_list(stock_prices, prices_text_position)
 
             # Display stock options
             options = [
-                "1. Buy CocaCola Stock (Dividend)",
-                "2. Buy Apple Stock (Growth)",
-                "3. Buy SPY Stock (ETF)",
-                "4. Buy NEWP Stock (Penny Stock)",
-                "5. Buy UNH Stock (Defensive)",
-                "0. Exit Stock Menu"
+                "[1] Buy CocaCola Stock (Dividend)",
+                "[2] Buy Apple Stock (Growth)",
+                "[3] Buy SPY Stock (ETF)",
+                "[4] Buy NEWP Stock (Penny Stock)",
+                "[5] Buy UNH Stock (Defensive)",
+                "[Esc] Exit Stock Menu"
             ]
 
             for i, option in enumerate(options):
-                text_position = (menu_rect.left + 20, menu_rect.top + 150 + i * 30)
+                text_position = (menu_rect.left + 20, menu_rect.top + 180 + i * 30)
                 self.draw_text(option, text_position, font_size=18)
 
+    def draw_stock_list(self, text, position, max_width=440, line_height=30):
+        font = pygame.font.Font(None, 24)  # Adjust the font size if needed
+        stocks = ['CocaCola (KO): $58', 'Apple (AAPL): $190', 'SPDR S&P 500 ETF Trust (SPY): $455', 'New Pacific Metals Corp (NEWP): $2', 'UnitedHealth Group Inc (UNH): $546']
+        for i, line in enumerate(stocks):
+            text_surface = font.render(line, True, (0, 255, 255))
+            self.display_surface.blit(text_surface, (position[0], position[1] + i * line_height))
 
     def get_stock_prices_text(self):
         if self.stock_prices is None:
@@ -252,22 +250,10 @@ class Player(pygame.sprite.Sprite):
         for stock_name, characteristics in self.stock_prices.items():
             current_price = characteristics['current_price']
             stock_line = f"{stock_name}: ${current_price}"
-            prices_text += stock_line + "\n"
+            prices_text += stock_line + ' '
 
-        return prices_text
+        return prices_text  
 
-    def display_prices(self):
-        prices_text = ""
-        for stock_name, characteristics in self.stock_prices.items():
-            current_price = characteristics['current_price']
-            prices_text += f"{stock_name}: ${current_price}\n"
-
-        # Check if prices_text is not empty before displaying
-        if prices_text:
-            # Display stock prices on the screen above the options
-            menu_rect = pygame.Rect(400, 200, 480, 400)
-            text_position = (menu_rect.left + 20, menu_rect.top + 120)
-            self.draw_text_multiline(prices_text, text_position, max_width=440, line_height=20)
     
     def draw_text_multiline(self, text, position, max_width, line_height=30):
         font = pygame.font.Font(None, 24)  # Adjust the font size if needed
@@ -296,77 +282,32 @@ class Player(pygame.sprite.Sprite):
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 if event.key in (pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5):
-                    stock_options = {
+                    stock_names = {
                         pygame.K_1: 'CocaCola (KO)',
                         pygame.K_2: 'Apple (AAPL)',
                         pygame.K_3: 'SPDR S&P 500 ETF Trust (SPY)',
                         pygame.K_4: 'New Pacific Metals Corp (NEWP)',
                         pygame.K_5: 'UnitedHealth Group Inc (UNH)',
                     }
-                    self.selected_stock = stock_options[event.key]
+                    self.selected_stock = stock_names[event.key]
                     # Clear the menu and display purchase prompt
                     self.clear_menu()
                     self.show_purchase_prompt = True
-                elif event.key == pygame.K_0:
-                    self.close_stock_menu()
-                    return  # Add return to exit the method and prevent further processing
+                    break
                 elif event.key == pygame.K_b:
                     # Clear the stock menu
                     self.clear_menu()
                     # Display purchase prompt
                     self.show_purchase_prompt = True
+                    break
 
         # Handle quantity input
         if self.input_active and self.show_purchase_prompt:
             self.get_numeric_input()
+            
         # Ensure that the menu is not redrawn in the next iteration
         if self.show_stock_menu or self.show_purchase_prompt:
             return
-
-    def close_stock_menu(self):
-        self.clear_menu()
-        self.show_stock_menu = False
-        self.show_purchase_prompt = False
-        self.input_active = False
-        self.selected_stock = None
-
-
-    def show_stock_details(self, stock_name):
-        self.selected_stock = stock_name
-        stock_type = self.stock_types[stock_name]['type']
-        stock_description = self.stock_types[stock_name]['description']
-
-        print(f"Stock Type: {stock_type}")
-        print(f"Description: {stock_description}")
-
-        self.show_purchase_options(stock_name)
-
-
-    def buy_stock(self, stock_name):
-        stock_type = self.stock_types[stock_name]['type']
-        stock_description = self.stock_types[stock_name]['description']
-
-        print(f"Stock Type: {stock_type}")
-        print(f"Description: {stock_description}")
-
-        quantity = int(input("Enter the quantity of stocks to purchase: "))
-
-        # Use the fluctuation range to determine the number of years to hold
-        fluctuation_range = self.stock_prices[stock_name]['fluctuation_range']
-        years_to_hold = random.uniform(*fluctuation_range)
-
-        # Get the current stock price from the data
-        stock_price = self.stock_prices[stock_name]['current_price']
-
-        future_value = self.calculate_future_value(stock_type, years_to_hold, quantity)
-        print(f"Future Value after {years_to_hold:.2f} years: ${future_value}")
-
-        total_cost = stock_price * quantity
-        if self.money >= total_cost:
-            self.money -= total_cost
-            self.stocks_owned[stock_name] += quantity
-        else:
-            print("Insufficient funds!")
 
     def handle_buy_input(self):
         # Display the performance message for the selected stock
@@ -381,17 +322,21 @@ class Player(pygame.sprite.Sprite):
         self.clear_menu()
 
         if stock_name == 'CocaCola (KO)':
-            message = "Congratulations! Your earned $81!"
-            self.earn_money(81)
+            gain = random.randint(20, 100)
+            message = f'Congratulations! Your earned ${gain}'
+            self.earn_money(gain)
         elif stock_name == 'Apple (AAPL)':
-            message = "OMG! Apple has performed terribly bad. Your lost $500!"
-            self.earn_money(-500)
+            lost = random.randint(500, 1000)
+            message = f'OMG! Apple has performed terribly bad. Your lost ${lost}!'
+            self.earn_money(lost * -1)
         elif stock_name == 'SPDR S&P 500 ETF Trust (SPY)':
-            message = "Great choice! SPY, being an ETF, has provided steady growth of 10% over the last 5 years. You earned $661."
-            self.earn_money(661)
+            gain = random.randint(100, 250)
+            message = f'Great choice! SPY, being an ETF, has provided steady growth of 10% over the last 5 years. You earned ${gain}.'
+            self.earn_money(gain)
         elif stock_name == 'New Pacific Metals Corp (NEWP)':
-            message = "It's a gamble! NEWP, being a penny stock, has shown volatility. You lost $1000!"
-            self.earn_money(-1000)
+            lost = random.randint(1000, 2000)
+            message = f'It\'s a gamble! NEWP, being a penny stock, has shown volatility. You lost ${lost}!'
+            self.earn_money(lost * -1)
         elif stock_name == 'UnitedHealth Group Inc (UNH)':
             message = "Steady and safe! UNH, being a defensive stock. You earned $1."
             self.earn_money(1)
@@ -408,17 +353,6 @@ class Player(pygame.sprite.Sprite):
         pygame.time.wait(10000)  # Wait for 5000 milliseconds (5 seconds)
 
 
-    def update_stock_prices(self):
-        for stock_name, characteristics in self.stock_prices.items():
-            initial_price = characteristics['initial_price']
-            fluctuation_range = characteristics['fluctuation_range']
-
-            fluctuation = random.uniform(*fluctuation_range)
-
-            self.stock_prices[stock_name]['current_price'] = round(
-                initial_price * (1 + fluctuation / 100), 2
-            )
-
     def draw_text(self, text, position, font_size=None):
         if font_size is not None:
             font = pygame.font.Font(None, font_size)
@@ -427,8 +361,6 @@ class Player(pygame.sprite.Sprite):
         
         text_surface = font.render(text, True, (255, 255, 255))
         self.display_surface.blit(text_surface, position)
-
-
 
     def clear_menu(self):
         # Clear the menu by drawing a filled rectangle over it

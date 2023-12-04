@@ -8,7 +8,6 @@ This file is to provide supporting functions for all the other files.
 
 current_file_path = os.path.abspath(__file__)
 grandparent_file_path = os.path.dirname(os.path.dirname(current_file_path))    
-print("My File Path:", grandparent_file_path) # /Users/zhongjian/Desktop/investment_valley_repo/investment_valley/investment_valley/code/support.py
 
 # To import image files and output a list of surfaces converted from images files for for character animations.
 # used in player.py
@@ -18,7 +17,6 @@ def import_folder(path):
         for image in image_files:
             image_surface = pygame.image.load(f'{path}/{image}').convert_alpha()
             surface_list.append(image_surface)
-    print(surface_list)
     return surface_list
 
 # Function to convert seconds to minutes
