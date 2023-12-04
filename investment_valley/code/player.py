@@ -302,6 +302,13 @@ class Player(pygame.sprite.Sprite):
                     self.clear_menu()
                     # Display purchase prompt
                     self.show_purchase_prompt = True
+                
+                elif event.key == pygame.K_s:
+                # Check if the player is not in the stock area, then close the menu
+                    posX, posY = self.pos
+                    posX, posY = int(posX), int(posY)
+                    if not (325 >= posX >= 115 and 250 >= posY >= 200):
+                        self.close_stock_menu()
 
         # Handle quantity input
         if self.input_active and self.show_purchase_prompt:
