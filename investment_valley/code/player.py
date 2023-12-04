@@ -312,11 +312,11 @@ class Player(pygame.sprite.Sprite):
 
 
     def close_stock_menu(self):
-        #self.clear_menu()
+        self.clear_menu()
         self.show_stock_menu = False
         self.show_purchase_prompt = False
         self.input_active = False
-        self.quantity_input = ""
+        self.selected_stock = None
 
     # def prompt_quantity_input(self):
     #     # Set a flag to indicate that the program is waiting for quantity input
