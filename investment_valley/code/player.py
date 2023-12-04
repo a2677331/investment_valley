@@ -225,10 +225,12 @@ class Player(pygame.sprite.Sprite):
             current_price = characteristics['current_price']
             prices_text += f"{stock_name}: ${current_price}\n"
 
-        # Display stock prices on updatethe screen above the options
-        menu_rect = pygame.Rect(400, 200, 480, 400)
-        text_position = (menu_rect.left + 20, menu_rect.top + 120)
-        self.draw_text_multiline(prices_text, text_position, max_width=440, line_height=20)
+        # Check if prices_text is not empty before displaying
+        if prices_text:
+            # Display stock prices on the screen above the options
+            menu_rect = pygame.Rect(400, 200, 480, 400)
+            text_position = (menu_rect.left + 20, menu_rect.top + 120)
+            self.draw_text_multiline(prices_text, text_position, max_width=440, line_height=20)
 
     
     def handle_buy_input(self):
