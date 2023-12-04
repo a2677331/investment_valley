@@ -296,6 +296,11 @@ class Player(pygame.sprite.Sprite):
                     if self.show_purchase_prompt:
                         self.show_purchase_prompt = False
                         self.input_active = True
+                elif event.key == pygame.K_b:
+                   # Clear the stock menu
+                   self.clear_menu()
+                   # Display a purchase prompt
+                   self.show_purchase_prompt = True
 
         # Handle quantity input
         if self.input_active:
