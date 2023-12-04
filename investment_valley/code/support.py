@@ -1,9 +1,14 @@
 import pygame
 from os import walk
+import os
 
 '''
 This file is to provide supporting functions for all the other files.
 '''
+
+current_file_path = os.path.abspath(__file__)
+grandparent_file_path = os.path.dirname(os.path.dirname(current_file_path))    
+print("My File Path:", grandparent_file_path) # /Users/zhongjian/Desktop/investment_valley_repo/investment_valley/investment_valley/code/support.py
 
 # To import image files and output a list of surfaces converted from images files for for character animations.
 # used in player.py
@@ -13,6 +18,7 @@ def import_folder(path):
         for image in image_files:
             image_surface = pygame.image.load(f'{path}/{image}').convert_alpha()
             surface_list.append(image_surface)
+    print(surface_list)
     return surface_list
 
 # Function to convert seconds to minutes
@@ -25,7 +31,7 @@ def seconds_to_minutes(seconds):
 # used in level.py
 def display_status_bar(screen, start_time, money):
     # display time left for each round of the game 
-    text_font = pygame.font.Font('font/LycheeSoda.ttf', 40)
+    text_font = pygame.font.Font(f'{grandparent_file_path}/font/LycheeSoda.ttf', 40)
     current_time = int(pygame.time.get_ticks() / 1000) - start_time
     seconds_left = 300 - current_time # set as 5 minutes time limit per round
     time_surface = text_font.render(f'Time Left: {seconds_to_minutes(seconds_left)}', False, (200,200,200)).convert()
@@ -43,12 +49,12 @@ def display_status_bar(screen, start_time, money):
 # used in game.py
 def show_intro_screen(screen, score):
     # game title
-    title_font = pygame.font.Font('font/LycheeSoda.ttf', 120)
+    title_font = pygame.font.Font(f'{grandparent_file_path}/font/LycheeSoda.ttf', 120)
     game_title_surface = title_font.render("Investment Valley", False, "#2979b9").convert()
     game_title_rect = game_title_surface.get_rect(center = (1280/2,180))
 
     # game instruction
-    text_font = pygame.font.Font('font/LycheeSoda.ttf', 30)
+    text_font = pygame.font.Font(f'{grandparent_file_path}/font/LycheeSoda.ttf', 30)
 
     # draw intro screen
     screen.fill("black")
