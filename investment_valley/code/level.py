@@ -61,7 +61,7 @@ class Level:
                 self.player.stock_menu()
                 self.player.handle_stock_menu_input()
             # Display stock prices on the screen
-            self.player.display_stock_prices()
+            self.player.get_stock_prices_text()
 
         return display_status_bar(self.display_surface, start_time, self.money)
 
