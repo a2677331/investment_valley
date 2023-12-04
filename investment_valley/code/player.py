@@ -368,10 +368,15 @@ class Player(pygame.sprite.Sprite):
             if numeric_input:
                 try:
                     years_to_hold = int(numeric_input)
-                    self.display_future_value(years_to_hold)
+                    future_value = self.calculate_future_value(self.selected_stock, years_to_hold, 1)
+                    self.display_future_value(years_to_hold, future_value)
                     self.input_active = False  # Stop further input
                 except ValueError:
                     print("Invalid input. Please enter a valid number.")
+        
+        # update the displayed quantity input in the game window
+        else:
+            self.quantity_input = numeric_input
 
 
         def buy_stock(self, stock_name):
