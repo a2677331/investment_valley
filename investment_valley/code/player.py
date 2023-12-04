@@ -398,7 +398,7 @@ class Player(pygame.sprite.Sprite):
         self.display_surface.blit(balance_image, (470,550))
         note_image1 = note_font.render('NOTE: You have a high yield savings account.',True,(0,0,0))
         note_image2 = note_font.render('This means you earn a high percent interest on your money.',True,(0,0,0))
-        note_image3 = note_font.render('You earn 5 percent upon each daily reset',True,(0,0,0))
+        note_image3 = note_font.render('You earn 5 percent upon each daily reset!',True,(0,0,0))
         self.display_surface.blit(note_image1, (350,660))
         self.display_surface.blit(note_image2, (300,680))
         self.display_surface.blit(note_image3, (380,700))
