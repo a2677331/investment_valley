@@ -295,18 +295,11 @@ class Player(pygame.sprite.Sprite):
                     self.clear_menu()
                     self.show_purchase_prompt = True
                 elif event.key == pygame.K_0:
-                    # Clear the stock menu
+                    # Clear the stock menu and close it completely
                     self.clear_menu()
-                    # Display a message on the empty menu
-                    message = "You exited the stock menu."
-                    text_position = (400, 250)
-                    self.draw_text(message, text_position)
-                    pygame.display.flip()
-                    pygame.time.wait(2000)  # Wait for 2000 milliseconds (2 seconds)
                     self.show_stock_menu = False
-                    if self.show_purchase_prompt:
-                        self.show_purchase_prompt = False
-                        self.input_active = True
+                    self.show_purchase_prompt = False
+                    self.input_active = True`
                 elif event.key == pygame.K_b:
                     # Clear the stock menu
                     self.clear_menu()
