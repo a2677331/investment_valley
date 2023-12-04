@@ -189,7 +189,7 @@ class Player(pygame.sprite.Sprite):
             text_position = (menu_rect.left + 20, menu_rect.top + 60)
             self.draw_text(f"Description:", text_position)
             text_position = (menu_rect.left + 20, menu_rect.top + 100)
-            self.draw_text_multiline(stock_description, text_position, max_width=50, line_height=30)
+            self.draw_text_multiline(stock_description, text_position, max_width=440, line_height=30)
 
             # Display buy option and handle input
             buy_option = "Press 'B' to Buy"
