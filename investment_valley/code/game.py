@@ -32,10 +32,6 @@ class Game:
                 # run the game
                 dt = self.clock.tick() / 1000
 
-                # Update the player and level
-                self.level.player.update(dt)
-                self.level.update(dt)
-
                 if self.level.run(dt, self.start_time)[0] <= 0:
                     self.game_active = False
                     self.start_time = int(pygame.time.get_ticks() / 1000)
