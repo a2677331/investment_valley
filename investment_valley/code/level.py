@@ -24,8 +24,8 @@ class Level:
         # setup background image, player and buidlings surfaces
         self.setup()
         
-        # money earned by user
-        self.money = 1500
+        # starting balance 
+        self.balance = 1500
 
     def setup(self):
         # background image
@@ -48,10 +48,11 @@ class Level:
         buidling_rects = [building1_rect, building2_rect, building3_rect, building4_rect, building5_rect]
         
         # player
-        self.player = Player((640,360), self.all_sprites, buidling_rects, self.display_surface, self.earn_money)
+        self.player = Player((640,360), self.all_sprites, buidling_rects, self.display_surface, self.update_balance)
     
-    def earn_money(self, value):
-        self.money += value
+    def update_balance(self, value):
+        self.balance += value
+        return self.balance
 
     def run(self, dt, start_time):
         self.display_surface.fill("black") # so don't accidentally see previous frame
@@ -71,4 +72,4 @@ class Level:
             if self.player.show_bank_menu:
                 self.player.bank_menu()
 
-        return display_status_bar(self.display_surface, start_time, self.money)
+        return display_status_bar(self.display_surface, start_time, self.balance)
