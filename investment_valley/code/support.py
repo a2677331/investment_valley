@@ -66,11 +66,11 @@ def show_intro_screen(screen, score):
         screen.blit(instruction_surface, instruction_rect)
 
         text_font = pygame.font.Font(f'{grandparent_file_path}/font/LycheeSoda.ttf', 30)
-        instruction_surface2 = text_font.render("Uses [Arrow keys] to move character", False, ("grey")).convert()
+        instruction_surface2 = text_font.render("Use [Arrow keys] to move character", False, ("grey")).convert()
         instruction_rect2 = instruction_surface2.get_rect(center = (1280/2,630))
         screen.blit(instruction_surface2, instruction_rect2)
 
-        instruction_surface3 = text_font.render("Press [Enter] to interact with buildings", False, ("grey")).convert()
+        instruction_surface3 = text_font.render("    Press [Enter] to interact with buildings", False, ("grey")).convert()
         instruction_rect3 = instruction_surface3.get_rect(center = (1280/2,660))
         screen.blit(instruction_surface3, instruction_rect3)
 
