@@ -47,12 +47,12 @@ def display_status_bar(screen, start_time, money):
 # used in game.py
 def show_intro_screen(screen, score):
     # game title
-    title_font = pygame.font.Font(f'{grandparent_file_path}/font/LycheeSoda.ttf', 120)
+    title_font = pygame.font.Font(f'{grandparent_file_path}/font/LycheeSoda.ttf', 130)
     game_title_surface = title_font.render("Investment Valley", False, "#2979b9").convert()
     game_title_rect = game_title_surface.get_rect(center = (1280/2,180))
 
     # game instruction
-    text_font = pygame.font.Font(f'{grandparent_file_path}/font/LycheeSoda.ttf', 30)
+    text_font = pygame.font.Font(f'{grandparent_file_path}/font/LycheeSoda.ttf', 40)
 
     # draw intro screen
     screen.fill("black")
@@ -61,9 +61,19 @@ def show_intro_screen(screen, score):
     # show different screens before initial play and other play
     if score is None:
         # show only instrction when first time played
-        instruction_surface = text_font.render("Press space to start", False, ("white")).convert()
-        instruction_rect = instruction_surface.get_rect(center = (1280/2,330))
+        instruction_surface = text_font.render("Press [Space] to start", False, ("white")).convert()
+        instruction_rect = instruction_surface.get_rect(center = (1280/2,430))
         screen.blit(instruction_surface, instruction_rect)
+
+        text_font = pygame.font.Font(f'{grandparent_file_path}/font/LycheeSoda.ttf', 30)
+        instruction_surface2 = text_font.render("Uses [Arrow keys] to move character", False, ("grey")).convert()
+        instruction_rect2 = instruction_surface2.get_rect(center = (1280/2,630))
+        screen.blit(instruction_surface2, instruction_rect2)
+
+        instruction_surface3 = text_font.render("Press [Enter] to interact with buildings", False, ("grey")).convert()
+        instruction_rect3 = instruction_surface3.get_rect(center = (1280/2,660))
+        screen.blit(instruction_surface3, instruction_rect3)
+
     else:
         # show updated game score and retry instruction if money score is not zero
         score_surface = text_font.render(f'Your last score: {score}', False, (111,196,169)).convert()
