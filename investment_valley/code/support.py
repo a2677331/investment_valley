@@ -37,7 +37,7 @@ def display_status_bar(screen, start_time, money):
     screen.blit(time_surface, time_rect)
 
     # display money earned by user
-    money_surface = text_font.render(f'Money Earned: ${money}', False, (200,200,200)).convert()
+    money_surface = text_font.render(f'Your Balance: ${money}', False, (200,200,200)).convert()
     money_rect = time_surface.get_rect(center=(200,25))
     screen.blit(money_surface, money_rect)
     return seconds_left, money

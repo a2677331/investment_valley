@@ -5,12 +5,12 @@ import pygame
 
 def play_lottery(display_surface, balance, update_balance):
     ticket_cost = 50
-    win_probability = 0.9 # winning probability for lottery should be low
+    win_probability = 0.05 # winning probability for lottery should be low
 
     # Check if the player has enough balance to play
     if balance < ticket_cost:
         # Print message on the screen
-        display_message(display_surface, "Insufficient balance to play.", 4000)
+        display_message(display_surface, "Insufficient balance to play.", 3000)
         return
 
     # Check if the player wins
