@@ -38,4 +38,3 @@ CINF-405 Team Project (Group 5)
   - [x] game map and builidng images
 - Code review, and merge pull requests from team members, resovle and fix conflicts if necessary
 - Wrote code for Real Estate buidling function and interaction
-
