@@ -27,6 +27,11 @@ class Level:
         # starting balance 
         self.balance = 1500
 
+        # background music
+        self.music = pygame.mixer.Sound(f'{grandparent_file_path}/audio/music.mp3')
+        self.music.set_volume(0.2)
+        self.music.play(loops = -1)
+
     def setup(self):
         # background image
         # THIS IS TEMPORARY CODE
