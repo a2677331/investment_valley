@@ -390,12 +390,24 @@ class Player(pygame.sprite.Sprite):
         self.draw_text(self.quantity_input, text_position)
 
     def bank_menu(self):
-        bank_menu_font = pygame.font.Font(f'{grandparent_file_path}/font/LycheeSoda.ttf', 100)
+        balance_font = pygame.font.Font(f'{grandparent_file_path}/font/LycheeSoda.ttf', 100)
+        note_font = pygame.font.Font(f'{grandparent_file_path}/font/LycheeSoda.ttf', 30)
         menu_image = pygame.image.load(f'{grandparent_file_path}/graphics/world/BankMenu.png')
         self.display_surface.blit(menu_image,(100,50))
-        balance_image = bank_menu_font.render("$"+str(self.money), True, (0,0,0))
-        self.display_surface.blit(balance_image, (470,600))
+        balance_image = balance_font.render("$"+str(round(self.money,2)), True, (0,0,0))
+        self.display_surface.blit(balance_image, (470,550))
+        note_image1 = note_font.render('NOTE: You have a high yield savings account.',True,(0,0,0))
+        note_image2 = note_font.render('This means you earn a high percent interest on your money.',True,(0,0,0))
+        note_image3 = note_font.render('You earn 5 percent upon each daily reset!',True,(0,0,0))
+        self.display_surface.blit(note_image1, (350,660))
+        self.display_surface.blit(note_image2, (300,680))
+        self.display_surface.blit(note_image3, (380,700))
 
+    def earn_bank_interest(self):
+        #Give the player 5% interest on their money if they have money in their bank account
+        if self.money>0:
+            self.money=self.money+self.money*0.05
+    
     def update(self, dt):
         self.input()
         self.get_status()

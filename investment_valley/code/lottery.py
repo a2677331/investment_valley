@@ -58,7 +58,3 @@ def display_message(level_instance, message):
 
     pygame.display.flip()
     pygame.time.wait(750)  # Display the message for 750 ms
-
-
-
-
