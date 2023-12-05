@@ -27,7 +27,7 @@ CINF-405 Team Project (Group 5)
 
 ## Jian Zhong: 
 - Wrote code for basic layout of the game: player animation, movement control and collision detection for each building
-  - [x] background music added
+  - [x] added background music 
   - [x] Initial running the game will display an intro screen without a money score, while subsequent runs will show both the introduction screen with the money score from previously played
   - [x] added a money score in the top bar
   - [x] set a timer for 5 min for each round
@@ -35,6 +35,6 @@ CINF-405 Team Project (Group 5)
   - [x] player can move using arrow keys
   - [x] 5 buildings with collision detection, so player cannot move across each building
   - [x] player animations
-  - [x] game map and builidng images
-- Code review, and merge pull requests from team members, resovle and fix conflicts if necessary
-- Wrote code for Real Estate buidling function and interaction
+  - [x] game map and building images
+- Code review, and merge pull requests from team members, resolve and fix conflicts if necessary
+- Wrote code for Real Estate building function and interaction
