@@ -16,13 +16,6 @@ CINF-405 Team Project (Group 5)
 - [x] player can "talk" to building, functions for bank building (Dylan)
 - [ ] Get Aidan's roulette code to run when the player interacts with the Casino building
 
-## Aidan Amarante:
-
-## Dylan Dayter:
-
-## Dominick Dupoux: 
-
-## Nick Bequette:
 
 ## Jian Zhong: 
 - Wrote code for basic layout of the game: player animation, movement control and collision detection for each building
