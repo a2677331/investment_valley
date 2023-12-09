@@ -14,7 +14,7 @@ CINF-405 Team Project (Group 5)
 - [x] functions for casino, lottery buildings (Aidan)
 - [ ] integrate Dominick's code
 - [x] player can "talk" to building, functions for bank building (Dylan)
-- [ ] Get Aidan's roulette code to run when the player interacts with the Casino building
+- [x] Get Aidan's roulette code to run when the player interacts with the Casino building
 
 
 ## Jian Zhong: 
