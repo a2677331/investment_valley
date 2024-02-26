@@ -1,34 +1,19 @@
 # Investment Valley
-CINF-405 Team Project (Group 5)
+My CINF-405 Project
 
 ## How to run the game:
 - cd to  `investment_valley`  folder
 - setup and activate Python Virtual Enviroment (Optional)
 - make sure Pygame is installed, I used `pip3 install pygame` on my Mac
-- make sure matplotlib is installed, I used `pip3 install matplotlib` on Mac
 - type  `python3 code/game.py`  to run the game
 
 ## Need to be done:
-- [ ] make graphs showing the price trend for stock, crypto, and real estate trading (Dominick)
-- [ ] player can buy/sell stocks, crypto or houses (Nick)
-- [ ] functions for casino, lottery, bank (Aidan)
-- [ ] integrate Dominick's code
-- [ ] player can "talk" to building (Dylan)
-- [ ] Get Aidan's roulette code to run when the player interacts with the respective buildings 
+- [ ] make graphs showing the price trend for stock, crypto, and real estate trading
+- [ ] functions for bank
 
-## Aidan
-
-## Dylan
-
-## Dominick 
-
-## Nick
-
-
-## Jian Zhong: 
-- Wrote code for basic layout of the game: player animation, movement control and collision detection for each building
+## What I did: 
   - [x] added background music 
-  - [x] Initial running the game will display an intro screen without a money score, while subsequent runs will show both the introduction screen with the money score from previously played
+  - [x] Initial running the game displays an intro screen, and subsequent runs will show the intro screen with the previous play's score
   - [x] added a money score in the top bar
   - [x] set a timer for 5 min for each round
   - [x] label each building with names "stock exchange", "casino"...
@@ -36,5 +21,6 @@ CINF-405 Team Project (Group 5)
   - [x] 5 buildings with collision detection, so player cannot move across each building
   - [x] player animations
   - [x] game map and building images
-- Code review, and merge pull requests from team members, resolve and fix conflicts if necessary
-- Wrote code for Real Estate building function and interaction
+  - [x] player can buy/sell stocks, and real-estates
+  - [x] functions for Casino, Lottery, Stock, Casino buildings
+  - [x] player can "talk" to buildings
