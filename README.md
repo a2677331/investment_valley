@@ -1,5 +1,5 @@
 # Investment Valley
-My CINF-405 Project
+My CINF-405 Project: A PyGame-Based Game Designed to teach a player Financial Knowledge and Investment Skills.
 
 ## How to run the game:
 - cd to  `investment_valley`  folder
